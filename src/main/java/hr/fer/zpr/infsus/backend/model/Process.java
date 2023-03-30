@@ -8,6 +8,6 @@ import lombok.*;
 @Setter
 @ToString
 public class Process {
-    String processId;
+    Long processId;
     String processName;
 }

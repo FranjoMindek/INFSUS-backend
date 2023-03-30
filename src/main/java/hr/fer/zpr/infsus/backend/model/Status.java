@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 public class Status {
-    String statusId;
-    String processId;
+    Long statusId;
+    Long processId;
     String statusName;
 }
