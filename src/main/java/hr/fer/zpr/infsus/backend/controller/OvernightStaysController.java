@@ -1,7 +1,6 @@
 package hr.fer.zpr.infsus.backend.controller;
 
 import hr.fer.zpr.infsus.backend.model.OvernightStay;
-import hr.fer.zpr.infsus.backend.model.Reservation;
 import hr.fer.zpr.infsus.backend.repository.OvernightStayRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
