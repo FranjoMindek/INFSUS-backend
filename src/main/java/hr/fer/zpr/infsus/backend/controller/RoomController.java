@@ -3,7 +3,6 @@ package hr.fer.zpr.infsus.backend.controller;
 import hr.fer.zpr.infsus.backend.model.Room;
 import hr.fer.zpr.infsus.backend.model.agergate.RoomDetailed;
 import hr.fer.zpr.infsus.backend.service.RoomService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +23,11 @@ public class RoomController {
     @GetMapping("/rooms/{roomId}")
     public RoomDetailed getRoomById(@PathVariable Long roomId) {
         return this.roomService.getRoomDetailedById(roomId);
+    }
+
+    @PostMapping("/rooms")
+    public boolean insertRoom(@RequestBody Room room) {
+        return this.roomService.insertRoom(room);
     }
 
     @PutMapping("/rooms/{roomId}")

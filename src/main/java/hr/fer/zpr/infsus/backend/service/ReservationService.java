@@ -21,6 +21,10 @@ public class ReservationService {
         return this.reservationRepository.getReservationById(reservationId);
     }
 
+    public boolean insertReservation(Reservation reservation) {
+        return this.reservationRepository.insertReservation(reservation);
+    }
+
     public boolean updateReservation(Reservation reservation) {
         return this.reservationRepository.updateReservation(reservation);
     }

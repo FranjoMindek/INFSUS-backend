@@ -15,23 +15,28 @@ public class ReservationsController {
     private final ReservationService reservationService;
 
     @GetMapping("/reservations")
-    public List<Reservation> getRooms() {
+    public List<Reservation> getReservations() {
         return this.reservationService.getReservations();
     }
 
     @GetMapping("/reservations/{reservationId}")
-    public Reservation getRoomById(@PathVariable Long reservationId) {
+    public Reservation getReservationById(@PathVariable Long reservationId) {
         return this.reservationService.getReservationById(reservationId);
     }
 
+    @PostMapping("/reservations")
+    public boolean insertReservation(@RequestBody Reservation reservation) {
+        return this.reservationService.insertReservation(reservation);
+    }
+
     @PutMapping("/reservations/{reservationId}")
-    public boolean updateRoom(@PathVariable Long reservationId,
+    public boolean updateReservation(@PathVariable Long reservationId,
                               @RequestBody Reservation reservation) {
         return this.reservationService.updateReservation(reservation);
     }
 
     @DeleteMapping("/reservations/{reservationId}")
-    public boolean deleteRoom(@PathVariable Long reservationId) {
+    public boolean deleteReservation(@PathVariable Long reservationId) {
         return this.reservationService.deleteReservation(reservationId);
     }
 }

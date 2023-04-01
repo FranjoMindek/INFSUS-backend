@@ -1,14 +1,12 @@
 package hr.fer.zpr.infsus.backend.repository;
 
 import hr.fer.zpr.infsus.backend.model.Client;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -43,6 +41,21 @@ public class ClientRepository {
         MapSqlParameterSource parameters = new MapSqlParameterSource("clientId", clientId);
 
         return njdbc.queryForObject(query, parameters, BeanPropertyRowMapper.newInstance(Client.class));
+    }
+
+    public boolean insertClient(Client client) {
+        String query = """
+                INSERT INTO 
+                    client (client_id, client_first_name, client_last_name)
+                VALUES 
+                    (:clientId, :clientFirstName, :clientLastName)
+                """;
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("clientId", client.getClientId());
+        parameters.addValue("clientFirstName", client.getClientFirstName());
+        parameters.addValue("clientLastName", client.getClientLastName());
+
+        return njdbc.update(query, parameters) > 0;
     }
 
     public boolean updateClient(Client client) {

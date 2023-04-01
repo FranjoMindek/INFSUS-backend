@@ -13,7 +13,7 @@ CREATE TABLE status (
 );
 
 CREATE TABLE client (
-    client_id SERIAL PRIMARY KEY,
+    client_id INTEGER PRIMARY KEY,
     client_first_name VARCHAR2(64 CHARACTERS) NOT NULL,
     client_last_name VARCHAR2(64 CHARACTERS)  NOT NULL
 );

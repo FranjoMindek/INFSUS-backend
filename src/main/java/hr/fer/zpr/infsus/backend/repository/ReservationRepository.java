@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -44,7 +43,22 @@ public class ReservationRepository {
         return njdbc.queryForObject(query, parameters, BeanPropertyRowMapper.newInstance(Reservation.class));
     }
 
-    public boolean updateReservation(Reservation reservartion) {
+    public boolean insertReservation(Reservation reservation) {
+        String query = """
+                INSERT INTO
+                    reservation (client_id, room_id, reservation_date_from, reservation_date_to, reservation_status_id)
+                VALUES 
+                    (:clientId, :rooMId, :reservationDateFrom, :reservationDateTo, :reservationStatusId)
+                """;
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("roomId", reservation.getRoomId());
+        parameters.addValue("reservationDateFrom", reservation.getReservationDateFrom());
+        parameters.addValue("reservationDateTo", reservation.getReservationDateTo());
+        parameters.addValue("reservationStatusId", reservation.getReservationStatusId());
+
+        return njdbc.update(query, parameters) > 0;
+    }
+    public boolean updateReservation(Reservation reservation) {
         String query = """
                 UPDATE
                     reservation
@@ -55,10 +69,10 @@ public class ReservationRepository {
                     reservation_status_id = :reservationStatusId
                 """;
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("roomId", reservartion.getRoomId());
-        parameters.addValue("reservationDateFrom", reservartion.getReservationDateFrom());
-        parameters.addValue("reservationDateTo", reservartion.getReservationDateTo());
-        parameters.addValue("reservationStatusId", reservartion.getReservationStatusId());
+        parameters.addValue("roomId", reservation.getRoomId());
+        parameters.addValue("reservationDateFrom", reservation.getReservationDateFrom());
+        parameters.addValue("reservationDateTo", reservation.getReservationDateTo());
+        parameters.addValue("reservationStatusId", reservation.getReservationStatusId());
 
         return njdbc.update(query, parameters) > 0;
     }

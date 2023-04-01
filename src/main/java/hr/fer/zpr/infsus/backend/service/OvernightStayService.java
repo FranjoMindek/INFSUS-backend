@@ -21,6 +21,10 @@ public class OvernightStayService {
         return this.overnightStayRepository.getOvernightStayById(overnightStayId);
     }
 
+    public boolean insertOvernightStay(OvernightStay overnightStay) {
+        return this.overnightStayRepository.insertOvernightStay(overnightStay);
+    }
+
     public boolean updateOvernightStay(OvernightStay overnightStay) {
         return this.overnightStayRepository.updateOvernightStay(overnightStay);
     }

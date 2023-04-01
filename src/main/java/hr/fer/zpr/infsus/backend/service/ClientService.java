@@ -14,12 +14,13 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
 
-    public List<Client> getClients() {
-        return this.clientRepository.getClients();
-    }
-
+    public List<Client> getClients() { return this.clientRepository.getClients(); }
     public Client getClientById(Long clientId) {
         return this.clientRepository.getClientById(clientId);
+    }
+
+    public boolean insertClient(Client client) {
+        return this.clientRepository.insertClient(client);
     }
 
     public boolean updateClient(Client client) {

@@ -44,7 +44,24 @@ public class OvernightStayRepository {
         return njdbc.queryForObject(query, parameters, BeanPropertyRowMapper.newInstance(OvernightStay.class));
     }
 
-    public boolean updateOvernightStay(OvernightStay reservartion) {
+    public boolean insertOvernightStay(OvernightStay overnightStay) {
+        String query = """
+                INSERT INTO
+                    overnight_stay (client_id, room_id, overnight_stay_date_from, overnight_stay_date_to, overnight_stay_status_id)
+                VALUES 
+                    (:clientId, :roomId, :overnightStayDateFrom, :overnightStayDateTo, :overnightStayStatusId)
+                """;
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("clientId", overnightStay.getClientId());
+        parameters.addValue("roomId", overnightStay.getRoomId());
+        parameters.addValue("overnightStayDateFrom", overnightStay.getOvernightStayDateFrom());
+        parameters.addValue("overnightStayDateTo", overnightStay.getOvernightStayDateTo());
+        parameters.addValue("overnightStayStatusId", overnightStay.getOvernightStayStatusId());
+
+        return njdbc.update(query, parameters) > 0;
+    }
+
+    public boolean updateOvernightStay(OvernightStay overnightStay) {
         String query = """
                 UPDATE
                     overnight_stay
@@ -55,10 +72,10 @@ public class OvernightStayRepository {
                     overnight_stay_status_id = :overnightStayStatusId
                 """;
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("roomId", reservartion.getRoomId());
-        parameters.addValue("overnightStayDateFrom", reservartion.getOvernightStayDateFrom());
-        parameters.addValue("overnightStayDateTo", reservartion.getOvernightStayDateTo());
-        parameters.addValue("overnightStayStatusId", reservartion.getOvernightStayStatusId());
+        parameters.addValue("roomId", overnightStay.getRoomId());
+        parameters.addValue("overnightStayDateFrom", overnightStay.getOvernightStayDateFrom());
+        parameters.addValue("overnightStayDateTo", overnightStay.getOvernightStayDateTo());
+        parameters.addValue("overnightStayStatusId", overnightStay.getOvernightStayStatusId());
 
         return njdbc.update(query, parameters) > 0;
     }

@@ -1,9 +1,9 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
 INSERT INTO
-    client (client_first_name, client_last_name)
+    client (client_id, client_first_name, client_last_name)
 VALUES
-    ('Pero', 'Peric');
+    ('11111', 'Pero', 'Peric');
 
 INSERT INTO
     process (process_id, process_name)

@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -84,6 +83,21 @@ public class RoomRepository {
         return njdbc.queryForObject(query, parameters, BeanPropertyRowMapper.newInstance(RoomDetailed.class));
     }
 
+    public boolean insertRoom(Room room) {
+        String query = """
+                INSERT INTO 
+                    room (room_code, room_floor, room_status_id, room_category_id)
+                VALUES 
+                    (:roomCode, :roomFloor, :roomStatusId, :roomCategoryId)
+                """;
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("roomCode", room.getRoomCode());
+        parameters.addValue("roomFloor", room.getRoomFloor());
+        parameters.addValue("roomStatusId", room.getRoomStatusId());
+        parameters.addValue("roomCategoryId", room.getRoomCategoryId());
+
+        return njdbc.update(query, parameters) > 0;
+    }
     public boolean updateRoom(Room room) {
         String query = """
                 UPDATE 

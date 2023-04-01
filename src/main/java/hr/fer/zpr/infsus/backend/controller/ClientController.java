@@ -24,6 +24,11 @@ public class ClientController {
         return this.clientService.getClientById(clientId);
     }
 
+    @PostMapping("/clients")
+    public boolean insertClient(@RequestBody Client client) {
+        return this.clientService.insertClient(client);
+    }
+
     @PutMapping("/clients/{clientId}")
     public boolean updateClient(@PathVariable Long clientId,
                                 @RequestBody Client client) {
