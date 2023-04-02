@@ -48,13 +48,14 @@ public class ReservationRepository {
                 INSERT INTO
                     reservation (client_id, room_id, reservation_date_from, reservation_date_to, reservation_status_id)
                 VALUES 
-                    (:clientId, :rooMId, :reservationDateFrom, :reservationDateTo, :reservationStatusId)
+                    (:clientId, :roomId, :reservationDateFrom, :reservationDateTo, :reservationStatusId)
                 """;
         MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("clientId", reservation.getClientId());
         parameters.addValue("roomId", reservation.getRoomId());
         parameters.addValue("reservationDateFrom", reservation.getReservationDateFrom());
         parameters.addValue("reservationDateTo", reservation.getReservationDateTo());
-        parameters.addValue("reservationStatusId", reservation.getReservationStatusId());
+        parameters.addValue("reservationStatusId", "ROOM_STATUS.RESERVED");
 
         return njdbc.update(query, parameters) > 0;
     }
@@ -67,8 +68,11 @@ public class ReservationRepository {
                     reservation_date_from = :reservationDateFrom,
                     reservation_date_to = :reservationDateTo,
                     reservation_status_id = :reservationStatusId
+                WHERE
+                    reservation_id = :reservationId
                 """;
         MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("reservationId", reservation.getReservationId());
         parameters.addValue("roomId", reservation.getRoomId());
         parameters.addValue("reservationDateFrom", reservation.getReservationDateFrom());
         parameters.addValue("reservationDateTo", reservation.getReservationDateTo());

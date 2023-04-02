@@ -15,5 +15,5 @@ public class Reservation {
     Long roomId;
     Date reservationDateFrom;
     Date reservationDateTo;
-    Long reservationStatusId;
+    String reservationStatusId;
 }
