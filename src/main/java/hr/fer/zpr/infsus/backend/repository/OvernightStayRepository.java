@@ -56,7 +56,7 @@ public class OvernightStayRepository {
         parameters.addValue("roomId", overnightStay.getRoomId());
         parameters.addValue("overnightStayDateFrom", overnightStay.getOvernightStayDateFrom());
         parameters.addValue("overnightStayDateTo", overnightStay.getOvernightStayDateTo());
-        parameters.addValue("overnightStayStatusId", overnightStay.getOvernightStayStatusId());
+        parameters.addValue("overnightStayStatusId", "OVERNIGHT_STAY_STATUS.PENDING");
 
         return njdbc.update(query, parameters) > 0;
     }

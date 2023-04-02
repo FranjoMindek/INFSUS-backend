@@ -8,7 +8,9 @@ VALUES
 INSERT INTO
     process (process_id, process_name)
 VALUES
-    ('ROOM_STATUS', 'Stanje sobe');
+    ('ROOM_STATUS', 'Stanje sobe'),
+    ('RESERVATION_STATUS', 'Stanje rezervacije'),
+    ('OVERNIGHT_STAY_STATUS', 'Stanje noćenja');
 
 INSERT INTO
     status (status_id, process_id, status_name)
@@ -16,7 +18,12 @@ VALUES
     ('ROOM_STATUS.OCCUPIED', 'ROOM_STATUS', 'Zauzeta'),
     ('ROOM_STATUS.RESERVED', 'ROOM_STATUS', 'Rezervirana'),
     ('ROOM_STATUS.READY', 'ROOM_STATUS', 'Slobodna'),
-    ('ROOM_STATUS.UNREADY', 'ROOM_STATUS', 'Nespremna');
+    ('ROOM_STATUS.UNREADY', 'ROOM_STATUS', 'Nespremna'),
+    ('RESERVATION_STATUS.PENDING', 'RESERVATION_STATUS', 'U tijeku'),
+    ('RESERVATION_STATUS.CANCELED', 'RESERVATION_STATUS', 'Otkazana'),
+    ('RESERVATION_STATUS.FINISHED', 'RESERVATION_STATUS', 'Uspješna'),
+    ('OVERNIGHT_STAY_STATUS.PENDING', 'OVERNIGHT_STAY_STATUS', 'U tijeku'),
+    ('OVERNIGHT_STAY_STATUS.FINISHED', 'OVERNIGHT_STAY_STATUS', 'Završeno');
 
 INSERT INTO
     room_bed_category (room_bed_category_id, room_bed_category_name)

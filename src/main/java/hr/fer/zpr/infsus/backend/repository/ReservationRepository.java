@@ -55,7 +55,7 @@ public class ReservationRepository {
         parameters.addValue("roomId", reservation.getRoomId());
         parameters.addValue("reservationDateFrom", reservation.getReservationDateFrom());
         parameters.addValue("reservationDateTo", reservation.getReservationDateTo());
-        parameters.addValue("reservationStatusId", "ROOM_STATUS.RESERVED");
+        parameters.addValue("reservationStatusId", "RESERVATION_STATUS.PENDING");
 
         return njdbc.update(query, parameters) > 0;
     }
