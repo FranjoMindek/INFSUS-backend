@@ -1,10 +1,12 @@
-CREATE TABLE process
+DROP TABLE IF EXISTS process CASCADE;
+CREATE TABLE IF NOT EXISTS process
 (
     process_id   VARCHAR(64) PRIMARY KEY,
     process_name VARCHAR(64) NOT NULL
 );
 
-CREATE TABLE status
+DROP TABLE IF EXISTS status CASCADE;
+CREATE TABLE  IF NOT EXISTS status
 (
     status_id   VARCHAR(64) PRIMARY KEY,
     process_id  VARCHAR(64) NOT NULL,
@@ -12,7 +14,8 @@ CREATE TABLE status
     FOREIGN KEY (process_id) REFERENCES process (process_id)
 );
 
-CREATE TABLE client
+DROP TABLE IF EXISTS client CASCADE;
+CREATE TABLE  IF NOT EXISTS client
 (
     client_id           SERIAL PRIMARY KEY,
     client_national_id  VARCHAR(64) NOT NULL UNIQUE,
@@ -21,29 +24,34 @@ CREATE TABLE client
     client_last_name    VARCHAR(64)
 );
 
-CREATE TABLE room_bed_category
+DROP TABLE IF EXISTS room_bed_category CASCADE;
+CREATE TABLE  IF NOT EXISTS room_bed_category
 (
     room_bed_category_id   VARCHAR(64) PRIMARY KEY,
     room_bed_category_name VARCHAR(64) NOT NULL
 );
 
-CREATE TABLE room_quality_category
+DROP TABLE IF EXISTS room_quality_category CASCADE;
+CREATE TABLE  IF NOT EXISTS room_quality_category
 (
     room_quality_category_id   VARCHAR(64) PRIMARY KEY,
     room_quality_category_name VARCHAR(64) NOT NULL
 );
 
-CREATE TABLE room_category
+DROP TABLE IF EXISTS room_category CASCADE;
+CREATE TABLE  IF NOT EXISTS room_category
 (
     room_category_id         VARCHAR(64) PRIMARY KEY,
     room_category_price      INTEGER     NOT NULL,
     room_bed_category_id     VARCHAR(64) NOT NULL,
     room_quality_category_id VARCHAR(64) NOT NULL,
     FOREIGN KEY (room_bed_category_id) REFERENCES room_bed_category (room_bed_category_id),
-    FOREIGN KEY (room_quality_category_id) REFERENCES room_quality_category (room_quality_category_id)
+    FOREIGN KEY (room_quality_category_id) REFERENCES room_quality_category (room_quality_category_id),
+    UNIQUE (room_category_price, room_bed_category_id, room_quality_category_id)
 );
 
-CREATE TABLE room
+DROP TABLE IF EXISTS room CASCADE;
+CREATE TABLE  IF NOT EXISTS room
 (
     room_id          SERIAL PRIMARY KEY,
     room_code        VARCHAR(16) NOT NULL,
@@ -51,10 +59,12 @@ CREATE TABLE room
     room_status_id   VARCHAR(64) NOT NULL,
     room_category_id VARCHAR(64) NOT NULL,
     FOREIGN KEY (room_category_id) REFERENCES room_category (room_category_id),
-    FOREIGN KEY (room_status_id) REFERENCES status (status_id)
+    FOREIGN KEY (room_status_id) REFERENCES status (status_id),
+    UNIQUE (room_code, room_floor)
 );
 
-CREATE TABLE overnight_stay
+DROP TABLE IF EXISTS overnight_stay CASCADE;
+CREATE TABLE  IF NOT EXISTS overnight_stay
 (
     overnight_stay_id        SERIAL PRIMARY KEY,
     client_id                INTEGER NOT NULL,
@@ -67,7 +77,8 @@ CREATE TABLE overnight_stay
     FOREIGN KEY (overnight_stay_status_id) REFERENCES status (status_id)
 );
 
-CREATE TABLE reservation
+DROP TABLE IF EXISTS reservation CASCADE;
+CREATE TABLE  IF NOT EXISTS reservation
 (
     reservation_id        SERIAL PRIMARY KEY,
     client_id             INTEGER NOT NULL,
