@@ -15,5 +15,5 @@ public class OvernightStay {
     Long roomId;
     Date overnightStayDateFrom;
     Date overnightStayDateTo;
-    Long overnightStayStatusId;
+    String overnightStayStatusId;
 }

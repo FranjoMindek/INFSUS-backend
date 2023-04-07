@@ -9,6 +9,8 @@ import lombok.*;
 @ToString
 public class Client {
     Long clientId;
+    String clientNationalId;
+    String clientPhoneNumber;
     String clientFirstName;
     String clientLastName;
 }

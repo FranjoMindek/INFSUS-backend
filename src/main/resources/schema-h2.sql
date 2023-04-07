@@ -13,9 +13,11 @@ CREATE TABLE status (
 );
 
 CREATE TABLE client (
-    client_id INTEGER PRIMARY KEY,
-    client_first_name VARCHAR2(64 CHARACTERS) NOT NULL,
-    client_last_name VARCHAR2(64 CHARACTERS)  NOT NULL
+    client_id SERIAL PRIMARY KEY,
+    client_national_id VARCHAR2(64 CHARACTERS) NOT NULL UNIQUE,
+    client_phone_number VARCHAR2(64 CHARACTERS) NOT NULL,
+    client_first_name VARCHAR2(64 CHARACTERS),
+    client_last_name VARCHAR2(64 CHARACTERS)
 );
 
 CREATE TABLE room_bed_category (

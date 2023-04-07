@@ -1,6 +1,7 @@
 package hr.fer.zpr.infsus.backend.service;
 
 import hr.fer.zpr.infsus.backend.model.OvernightStay;
+import hr.fer.zpr.infsus.backend.model.OvernightStayInsert;
 import hr.fer.zpr.infsus.backend.repository.OvernightStayRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.List;
 public class OvernightStayService {
 
     private final OvernightStayRepository overnightStayRepository;
+    private final ClientService clientService;
 
     public List<OvernightStay> getOvernightStays() {
         return this.overnightStayRepository.getOvernightStays();
@@ -21,8 +23,9 @@ public class OvernightStayService {
         return this.overnightStayRepository.getOvernightStayById(overnightStayId);
     }
 
-    public boolean insertOvernightStay(OvernightStay overnightStay) {
-        return this.overnightStayRepository.insertOvernightStay(overnightStay);
+    public boolean insertOvernightStay(OvernightStayInsert overnightStayInsert) {
+        Long clientId = this.clientService.insertClientIfNew(overnightStayInsert);
+        return this.overnightStayRepository.insertOvernightStay(overnightStayInsert, clientId);
     }
 
     public boolean updateOvernightStay(OvernightStay overnightStay) {

@@ -26,6 +26,10 @@ public class RoomService {
         return this.roomRepository.getRoomDetailedById(roomId);
     }
 
+    public boolean updateRoomStatus(Long roomId, String roomStatusId) {
+        return this.roomRepository.updateRoomStatus(roomId, roomStatusId);
+    }
+
     public boolean insertRoom(Room room) { return this.roomRepository.insertRoom(room); }
 
     public boolean updateRoom(Room room) {

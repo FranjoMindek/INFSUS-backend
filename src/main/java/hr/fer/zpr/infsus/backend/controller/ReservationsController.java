@@ -1,6 +1,7 @@
 package hr.fer.zpr.infsus.backend.controller;
 
 import hr.fer.zpr.infsus.backend.model.Reservation;
+import hr.fer.zpr.infsus.backend.model.ReservationInsert;
 import hr.fer.zpr.infsus.backend.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class ReservationsController {
     }
 
     @PostMapping("/reservations")
-    public boolean insertReservation(@RequestBody Reservation reservation) {
-        return this.reservationService.insertReservation(reservation);
+    public boolean insertReservation(@RequestBody ReservationInsert reservationInsert) {
+        return this.reservationService.insertReservation(reservationInsert);
     }
 
     @PutMapping("/reservations/{reservationId}")

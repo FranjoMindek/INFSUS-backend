@@ -1,6 +1,7 @@
 package hr.fer.zpr.infsus.backend.repository;
 
 import hr.fer.zpr.infsus.backend.model.Reservation;
+import hr.fer.zpr.infsus.backend.model.ReservationInsert;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -43,7 +44,7 @@ public class ReservationRepository {
         return njdbc.queryForObject(query, parameters, BeanPropertyRowMapper.newInstance(Reservation.class));
     }
 
-    public boolean insertReservation(Reservation reservation) {
+    public boolean insertReservation(ReservationInsert reservationInsert, Long clientId) {
         String query = """
                 INSERT INTO
                     reservation (client_id, room_id, reservation_date_from, reservation_date_to, reservation_status_id)
@@ -51,10 +52,10 @@ public class ReservationRepository {
                     (:clientId, :roomId, :reservationDateFrom, :reservationDateTo, :reservationStatusId)
                 """;
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("clientId", reservation.getClientId());
-        parameters.addValue("roomId", reservation.getRoomId());
-        parameters.addValue("reservationDateFrom", reservation.getReservationDateFrom());
-        parameters.addValue("reservationDateTo", reservation.getReservationDateTo());
+        parameters.addValue("clientId", clientId);
+        parameters.addValue("roomId", reservationInsert.getRoomId());
+        parameters.addValue("reservationDateFrom", reservationInsert.getReservationDateFrom());
+        parameters.addValue("reservationDateTo", reservationInsert.getReservationDateTo());
         parameters.addValue("reservationStatusId", "RESERVATION_STATUS.PENDING");
 
         return njdbc.update(query, parameters) > 0;

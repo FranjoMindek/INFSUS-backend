@@ -1,9 +1,9 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
 INSERT INTO
-    client (client_id, client_first_name, client_last_name)
+    client (client_national_id, client_phone_number, client_first_name, client_last_name)
 VALUES
-    ('11111', 'Pero', 'Peric');
+    ('12312312321321', '099-4750-456', 'Pero', 'Peric');
 
 INSERT INTO
     process (process_id, process_name)
@@ -16,7 +16,7 @@ INSERT INTO
     status (status_id, process_id, status_name)
 VALUES
     ('ROOM_STATUS.OCCUPIED', 'ROOM_STATUS', 'Zauzeta'),
-    ('ROOM_STATUS.RESERVED', 'ROOM_STATUS', 'Rezervirana'),
+--     ('ROOM_STATUS.RESERVED', 'ROOM_STATUS', 'Rezervirana'),
     ('ROOM_STATUS.READY', 'ROOM_STATUS', 'Slobodna'),
     ('ROOM_STATUS.UNREADY', 'ROOM_STATUS', 'Nespremna'),
     ('RESERVATION_STATUS.PENDING', 'RESERVATION_STATUS', 'U tijeku'),

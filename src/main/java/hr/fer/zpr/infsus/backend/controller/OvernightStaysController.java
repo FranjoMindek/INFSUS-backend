@@ -1,6 +1,7 @@
 package hr.fer.zpr.infsus.backend.controller;
 
 import hr.fer.zpr.infsus.backend.model.OvernightStay;
+import hr.fer.zpr.infsus.backend.model.OvernightStayInsert;
 import hr.fer.zpr.infsus.backend.service.OvernightStayService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class OvernightStaysController {
     }
 
     @PostMapping("/overnight-stays")
-    public boolean insertOvernightStay(@RequestBody OvernightStay overnightStay) {
-        return this.overnightStayService.insertOvernightStay(overnightStay);
+    public boolean insertOvernightStay(@RequestBody OvernightStayInsert overnightStayInsert) {
+        return this.overnightStayService.insertOvernightStay(overnightStayInsert);
     }
 
     @PutMapping("/overnight-stays/{overnightStaysId}")

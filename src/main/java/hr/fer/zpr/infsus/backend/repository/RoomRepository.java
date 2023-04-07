@@ -120,6 +120,22 @@ public class RoomRepository {
         return njdbc.update(query, parameters) > 0;
     }
 
+    public boolean updateRoomStatus(Long roomId, String roomStatusId) {
+        String query = """
+                UPDATE
+                    room
+                SET
+                    room_status_id = :roomStatusId
+                WHERE
+                    room_id = :roomId
+                """;
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("roomId", roomId);
+        parameters.addValue("roomStatusId", roomStatusId);
+
+        return this.njdbc.update(query, parameters) > 0;
+    }
+
     public boolean deleteRoom(Long roomId) {
         String query = """
                 DELETE
@@ -130,6 +146,6 @@ public class RoomRepository {
                 """;
         MapSqlParameterSource parameters = new MapSqlParameterSource("roomId", roomId);
 
-        return njdbc.update(query, parameters) > 0;
+        return this.njdbc.update(query, parameters) > 0;
     }
 }

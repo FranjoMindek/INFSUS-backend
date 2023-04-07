@@ -1,6 +1,7 @@
 package hr.fer.zpr.infsus.backend.controller;
 
 import hr.fer.zpr.infsus.backend.model.Client;
+import hr.fer.zpr.infsus.backend.model.ClientUpdate;
 import hr.fer.zpr.infsus.backend.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,15 +25,20 @@ public class ClientController {
         return this.clientService.getClientById(clientId);
     }
 
+    @GetMapping("/clients/")
+    public Client getClientByNationalId(@RequestParam String clientNationalId) {
+        return this.clientService.getClientByNationalId(clientNationalId);
+    }
+
     @PostMapping("/clients")
-    public boolean insertClient(@RequestBody Client client) {
+    public Long insertClient(@RequestBody Client client) {
         return this.clientService.insertClient(client);
     }
 
     @PutMapping("/clients/{clientId}")
     public boolean updateClient(@PathVariable Long clientId,
-                                @RequestBody Client client) {
-        return this.clientService.updateClient(client);
+                                @RequestBody ClientUpdate clientUpdate) {
+        return this.clientService.updateClient(clientUpdate);
     }
 
     @DeleteMapping("/clients/{clientId}")

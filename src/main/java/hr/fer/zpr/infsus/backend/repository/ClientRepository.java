@@ -1,10 +1,13 @@
 package hr.fer.zpr.infsus.backend.repository;
 
 import hr.fer.zpr.infsus.backend.model.Client;
+import hr.fer.zpr.infsus.backend.model.ClientUpdate;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -43,35 +46,55 @@ public class ClientRepository {
         return njdbc.queryForObject(query, parameters, BeanPropertyRowMapper.newInstance(Client.class));
     }
 
-    public boolean insertClient(Client client) {
+    public Client getClientByNationalId(String clientNationalId) {
         String query = """
-                INSERT INTO 
-                    client (client_id, client_first_name, client_last_name)
-                VALUES 
-                    (:clientId, :clientFirstName, :clientLastName)
+                SELECT 
+                    *
+                FROM 
+                    client
+                WHERE 
+                    client_national_id = :clientNationalId
                 """;
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("clientId", client.getClientId());
-        parameters.addValue("clientFirstName", client.getClientFirstName());
-        parameters.addValue("clientLastName", client.getClientLastName());
+        MapSqlParameterSource parameters = new MapSqlParameterSource("clientNationalId", clientNationalId);
 
-        return njdbc.update(query, parameters) > 0;
+        List<Client> result = njdbc.query(query, parameters, BeanPropertyRowMapper.newInstance(Client.class));
+        return result.size() > 0 ? result.get(0) : null;
     }
 
-    public boolean updateClient(Client client) {
+    public Long insertClient(String clientNationalId, String clientPhoneNumber, String clientFirstName, String clientLastName) {
+        String query = """
+                INSERT INTO 
+                    client (client_national_id, client_phone_number, client_first_name, client_last_name)
+                VALUES 
+                    (:clientNationalId, :clientPhoneNumber, :clientFirstName, :clientLastName)
+                """;
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("clientNationalId", clientNationalId);
+        parameters.addValue("clientPhoneNumber", clientPhoneNumber);
+        parameters.addValue("clientFirstName", clientFirstName);
+        parameters.addValue("clientLastName", clientLastName);
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        njdbc.update(query, parameters, keyHolder);
+        return keyHolder.getKey().longValue();
+    }
+
+    public boolean updateClient(ClientUpdate clientUpdate) {
         String query = """
                 UPDATE 
                     client
                 SET
+                    client_phone_number = :clientPhoneNumber,
                     client_first_name = :clientFirstName,
                     client_last_name = :clientLastName
                 WHERE
                     client_id = :clientId
                 """;
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("clientId", client.getClientId());
-        parameters.addValue("clientFirstName", client.getClientFirstName());
-        parameters.addValue("clientLastName", client.getClientLastName());
+        parameters.addValue("clientId", clientUpdate.getClientId());
+        parameters.addValue("clientPhoneNumber", clientUpdate.getClientPhoneNumber());
+        parameters.addValue("clientFirstName", clientUpdate.getClientFirstName());
+        parameters.addValue("clientLastName", clientUpdate.getClientLastName());
 
         return njdbc.update(query, parameters) > 0;
     }
