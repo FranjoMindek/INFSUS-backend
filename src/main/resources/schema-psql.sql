@@ -42,6 +42,7 @@ DROP TABLE IF EXISTS room_category CASCADE;
 CREATE TABLE  IF NOT EXISTS room_category
 (
     room_category_id         VARCHAR(64) PRIMARY KEY,
+    room_category_name       VARCHAR(64) NOT NULL,
     room_category_price      INTEGER     NOT NULL,
     room_bed_category_id     VARCHAR(64) NOT NULL,
     room_quality_category_id VARCHAR(64) NOT NULL,

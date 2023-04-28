@@ -1,7 +1,7 @@
 package hr.fer.zpr.infsus.backend.service;
 
 import hr.fer.zpr.infsus.backend.model.Room;
-import hr.fer.zpr.infsus.backend.model.agergate.RoomDetailed;
+import hr.fer.zpr.infsus.backend.model.RoomDetailed;
 import hr.fer.zpr.infsus.backend.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

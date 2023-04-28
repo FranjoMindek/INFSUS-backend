@@ -13,7 +13,6 @@ import java.util.List;
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
-    private final RoomService roomService;
     private final ClientService clientService;
 
     public List<Reservation> getReservations() {

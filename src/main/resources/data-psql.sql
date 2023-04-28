@@ -58,16 +58,16 @@ VALUES ('BASIC', 'Minimalno opremljena'),
        ('STANDARD', 'Normalno opremljena '),
        ('PREMIUM', 'Luksuzno opremljena');
 
-INSERT INTO room_category (room_category_id, room_category_price, room_bed_category_id, room_quality_category_id)
-VALUES ('B_DOUBLE', 50, 'DOUBLE_BED', 'BASIC'),
-       ('S_DOUBLE', 100, 'DOUBLE_BED', 'STANDARD'),
-       ('P_DOUBLE', 200, 'DOUBLE_BED', 'PREMIUM'),
-       ('B_ONE_SINGLE', 30, 'ONE_SINGLE_BED', 'BASIC'),
-       ('S_ONE_SINGLE', 60, 'ONE_SINGLE_BED', 'STANDARD'),
-       ('B_TWO_SINGLE', 50, 'TWO_SINGLE_BED', 'BASIC'),
-       ('S_TWO_SINGLE', 100, 'TWO_SINGLE_BED', 'STANDARD'),
-       ('B_THREE_SINGLE', 80, 'THREE_SINGLE_BED', 'BASIC'),
-       ('S_THREE_SINGLE', 160, 'THREE_SINGLE_BED', 'STANDARD');
+INSERT INTO room_category (room_category_id, room_category_name, room_category_price, room_bed_category_id, room_quality_category_id)
+VALUES ('B_DOUBLE', 'Obična bračni krevet', 50, 'DOUBLE_BED', 'BASIC'),
+       ('S_DOUBLE', 'Standardna bračni krevet', 100, 'DOUBLE_BED', 'STANDARD'),
+       ('P_DOUBLE', 'Luksuzna bračni krevet', 200, 'DOUBLE_BED', 'PREMIUM'),
+       ('B_ONE_SINGLE', 'Obična jednokrevetna', 30, 'ONE_SINGLE_BED', 'BASIC'),
+       ('S_ONE_SINGLE', 'Standardna jednokrevetna', 60, 'ONE_SINGLE_BED', 'STANDARD'),
+       ('B_TWO_SINGLE', 'Obična dvokrevetna', 50, 'TWO_SINGLE_BED', 'BASIC'),
+       ('S_TWO_SINGLE', 'Standardna dvokrevetna', 100, 'TWO_SINGLE_BED', 'STANDARD'),
+       ('B_THREE_SINGLE', 'Obična trokrevetna', 80, 'THREE_SINGLE_BED', 'BASIC'),
+       ('S_THREE_SINGLE', 'Standardna trokrevetna', 160, 'THREE_SINGLE_BED', 'STANDARD');
 
 INSERT INTO room (room_code, room_floor, room_status_id, room_category_id)
 VALUES ('001', 1, 'ROOM_STATUS.READY', 'B_DOUBLE'),

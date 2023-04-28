@@ -1,4 +1,4 @@
-package hr.fer.zpr.infsus.backend.model.agergate;
+package hr.fer.zpr.infsus.backend.model;
 
 import lombok.*;
 

@@ -1,7 +1,7 @@
 package hr.fer.zpr.infsus.backend.repository;
 
 import hr.fer.zpr.infsus.backend.model.Room;
-import hr.fer.zpr.infsus.backend.model.agergate.RoomDetailed;
+import hr.fer.zpr.infsus.backend.model.RoomDetailed;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
