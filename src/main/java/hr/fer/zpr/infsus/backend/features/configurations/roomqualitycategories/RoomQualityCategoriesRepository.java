@@ -1,6 +1,6 @@
-package hr.fer.zpr.infsus.backend.repository.configuration;
+package hr.fer.zpr.infsus.backend.features.configurations.roomqualitycategories;
 
-import hr.fer.zpr.infsus.backend.model.Codebook;
+import hr.fer.zpr.infsus.backend.features.codebooks.data.Codebook;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RoomQualityCategoryRepository {
+public class RoomQualityCategoriesRepository {
     private final NamedParameterJdbcTemplate njdbc;
 
-    public RoomQualityCategoryRepository(@Qualifier("NamedParameterJdbcTemplate") NamedParameterJdbcTemplate njdbc) {
+    public RoomQualityCategoriesRepository(@Qualifier("NamedParameterJdbcTemplate") NamedParameterJdbcTemplate njdbc) {
         this.njdbc = njdbc;
     }
 
