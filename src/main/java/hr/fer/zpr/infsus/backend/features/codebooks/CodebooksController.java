@@ -1,7 +1,6 @@
-package hr.fer.zpr.infsus.backend.controller;
+package hr.fer.zpr.infsus.backend.features.codebooks;
 
-import hr.fer.zpr.infsus.backend.model.Codebook;
-import hr.fer.zpr.infsus.backend.service.CodebookService;
+import hr.fer.zpr.infsus.backend.features.codebooks.data.Codebook;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +15,13 @@ import java.util.Map;
 @RequestMapping("/api")
 public class CodebooksController {
 
-    private final CodebookService codebookService;
+    private final CodebooksService codebooksService;
 
     @GetMapping("/codebooks")
     private Map<String, List<Codebook>> getCodebooks() {
-        return this.codebookService.getCodebooks();
+        return this.codebooksService.getCodebooks();
     }
 
     @GetMapping("/codebooks/{codebooks}")
-    private Map<String, List<Codebook>> getCodebooks(@PathVariable List<String> codebooks) { return this.codebookService.getCodebooks(codebooks); }
+    private Map<String, List<Codebook>> getCodebooks(@PathVariable List<String> codebooks) { return this.codebooksService.getCodebooks(codebooks); }
 }

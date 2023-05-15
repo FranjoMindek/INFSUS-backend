@@ -1,7 +1,7 @@
-package hr.fer.zpr.infsus.backend.repository;
+package hr.fer.zpr.infsus.backend.features.codebooks;
 
-import hr.fer.zpr.infsus.backend.model.Codebook;
-import hr.fer.zpr.infsus.backend.model.enums.CodebookEnum;
+import hr.fer.zpr.infsus.backend.features.codebooks.data.Codebook;
+import hr.fer.zpr.infsus.backend.features.codebooks.data.CodebookEnum;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CodebookRepository {
+public class CodebooksRepository {
 
     private final NamedParameterJdbcTemplate njdbc;
 
-    public CodebookRepository(@Qualifier("NamedParameterJdbcTemplate") NamedParameterJdbcTemplate njdbc) {
+    public CodebooksRepository(@Qualifier("NamedParameterJdbcTemplate") NamedParameterJdbcTemplate njdbc) {
         this.njdbc = njdbc;
     }
 

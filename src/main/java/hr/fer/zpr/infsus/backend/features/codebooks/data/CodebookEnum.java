@@ -1,4 +1,4 @@
-package hr.fer.zpr.infsus.backend.model.enums;
+package hr.fer.zpr.infsus.backend.features.codebooks.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

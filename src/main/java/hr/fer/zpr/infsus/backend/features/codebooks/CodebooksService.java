@@ -1,8 +1,7 @@
-package hr.fer.zpr.infsus.backend.service;
+package hr.fer.zpr.infsus.backend.features.codebooks;
 
-import hr.fer.zpr.infsus.backend.model.Codebook;
-import hr.fer.zpr.infsus.backend.model.enums.CodebookEnum;
-import hr.fer.zpr.infsus.backend.repository.CodebookRepository;
+import hr.fer.zpr.infsus.backend.features.codebooks.data.Codebook;
+import hr.fer.zpr.infsus.backend.features.codebooks.data.CodebookEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +11,9 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class CodebookService {
+public class CodebooksService {
 
-    private final CodebookRepository codebooksRepository;
+    private final CodebooksRepository codebooksRepository;
 
     public Map<String, List<Codebook>> getCodebooks() {
         Map<String, List<Codebook>> map = new HashMap<>();
