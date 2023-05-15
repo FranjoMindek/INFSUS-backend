@@ -1,7 +1,6 @@
-package hr.fer.zpr.infsus.backend.controller.configuration;
+package hr.fer.zpr.infsus.backend.features.configurations.roombedcategories;
 
-import hr.fer.zpr.infsus.backend.model.Codebook;
-import hr.fer.zpr.infsus.backend.service.configuration.RoomBedCategoryService;
+import hr.fer.zpr.infsus.backend.features.codebooks.data.Codebook;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,12 +9,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-public class RoomBedCategoryController {
-    private final RoomBedCategoryService roomBedCategoryService;
+public class RoomBedCategoriesController {
+    private final RoomBedCategoriesService roomBedCategoriesService;
 
     @GetMapping("/room-bed-categories")
     public List<Codebook> getRoomBedCategories() {
-        return this.roomBedCategoryService.getRoomBedCategories();
+        return this.roomBedCategoriesService.getRoomBedCategories();
     }
 
     // client decides the id
@@ -23,11 +22,11 @@ public class RoomBedCategoryController {
     public boolean insertRoomBedCategory(
             @PathVariable String id, // could technically have DTO which doesn't include id to reduce network traffic
             @RequestBody Codebook roomBedCategory) {
-        return this.roomBedCategoryService.insertRoomBedCategory(roomBedCategory);
+        return this.roomBedCategoriesService.insertRoomBedCategory(roomBedCategory);
     }
 
     @DeleteMapping("/room-bed-categories/{id}")
     public boolean deleteRoomBedCategory(@PathVariable String id) {
-        return this.roomBedCategoryService.deleteRoomBedCategory(id);
+        return this.roomBedCategoriesService.deleteRoomBedCategory(id);
     }
 }

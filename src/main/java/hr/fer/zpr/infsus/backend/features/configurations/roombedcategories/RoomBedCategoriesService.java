@@ -1,7 +1,6 @@
-package hr.fer.zpr.infsus.backend.service.configuration;
+package hr.fer.zpr.infsus.backend.features.configurations.roombedcategories;
 
-import hr.fer.zpr.infsus.backend.model.Codebook;
-import hr.fer.zpr.infsus.backend.repository.configuration.RoomBedCategoryRepository;
+import hr.fer.zpr.infsus.backend.features.codebooks.data.Codebook;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +8,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RoomBedCategoryService {
-    private final RoomBedCategoryRepository roomBedCategoryRepository;
+public class RoomBedCategoriesService {
+    private final RoomBedCategoriesRepository roomBedCategoryRepository;
 
     public List<Codebook> getRoomBedCategories() {
         return this.roomBedCategoryRepository.getRoomBedCategories();
