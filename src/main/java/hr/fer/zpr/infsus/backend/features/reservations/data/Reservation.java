@@ -1,14 +1,12 @@
-package hr.fer.zpr.infsus.backend.model;
+package hr.fer.zpr.infsus.backend.features.reservations.data;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Value;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Value
+@Builder
 public class Reservation {
     Long reservationId;
     Long clientId;
