@@ -1,7 +1,7 @@
-package hr.fer.zpr.infsus.backend.repository;
+package hr.fer.zpr.infsus.backend.features.rooms;
 
-import hr.fer.zpr.infsus.backend.model.Room;
-import hr.fer.zpr.infsus.backend.model.RoomDetailed;
+import hr.fer.zpr.infsus.backend.features.rooms.data.Room;
+import hr.fer.zpr.infsus.backend.features.rooms.data.RoomDetailed;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RoomRepository {
+public class RoomsRepository {
 
     private final NamedParameterJdbcTemplate njdbc;
 
-    public RoomRepository(@Qualifier("NamedParameterJdbcTemplate") NamedParameterJdbcTemplate njdbc) {
+    public RoomsRepository(@Qualifier("NamedParameterJdbcTemplate") NamedParameterJdbcTemplate njdbc) {
         this.njdbc = njdbc;
     }
 
