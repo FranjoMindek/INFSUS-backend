@@ -1,15 +1,13 @@
-package hr.fer.zpr.infsus.backend.model;
+package hr.fer.zpr.infsus.backend.features.overnightstays.data;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
-public class OvernightStayInsert {
+@Data
+public class OvernightStayInsertDTO {
     String clientNationalId;
     String clientFirstName;
     String clientLastName;

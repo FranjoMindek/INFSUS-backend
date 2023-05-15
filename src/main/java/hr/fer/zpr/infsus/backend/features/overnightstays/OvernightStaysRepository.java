@@ -1,7 +1,6 @@
-package hr.fer.zpr.infsus.backend.repository;
+package hr.fer.zpr.infsus.backend.features.overnightstays;
 
-import hr.fer.zpr.infsus.backend.model.OvernightStay;
-import hr.fer.zpr.infsus.backend.model.OvernightStayInsert;
+import hr.fer.zpr.infsus.backend.features.overnightstays.data.OvernightStay;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -11,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class OvernightStayRepository {
+public class OvernightStaysRepository {
 
     private final NamedParameterJdbcTemplate njdbc;
 
-    public OvernightStayRepository(@Qualifier("NamedParameterJdbcTemplate") NamedParameterJdbcTemplate njdbc) {
+    public OvernightStaysRepository(@Qualifier("NamedParameterJdbcTemplate") NamedParameterJdbcTemplate njdbc) {
         this.njdbc = njdbc;
     }
 
@@ -45,7 +44,7 @@ public class OvernightStayRepository {
         return njdbc.queryForObject(query, parameters, BeanPropertyRowMapper.newInstance(OvernightStay.class));
     }
 
-    public boolean insertOvernightStay(OvernightStayInsert overnightStayInsert, Long clientId) {
+    public boolean insertOvernightStay(OvernightStay overnightStay) {
         String query = """
                 INSERT INTO
                     overnight_stay (client_id, room_id, overnight_stay_date_from, overnight_stay_date_to, overnight_stay_status_id)
@@ -53,10 +52,10 @@ public class OvernightStayRepository {
                     (:clientId, :roomId, :overnightStayDateFrom, :overnightStayDateTo, :overnightStayStatusId)
                 """;
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("clientId", clientId);
-        parameters.addValue("roomId", overnightStayInsert.getRoomId());
-        parameters.addValue("overnightStayDateFrom", overnightStayInsert.getOvernightStayDateFrom());
-        parameters.addValue("overnightStayDateTo", overnightStayInsert.getOvernightStayDateTo());
+        parameters.addValue("clientId", overnightStay.getClientId());
+        parameters.addValue("roomId", overnightStay.getRoomId());
+        parameters.addValue("overnightStayDateFrom", overnightStay.getOvernightStayDateFrom());
+        parameters.addValue("overnightStayDateTo", overnightStay.getOvernightStayDateTo());
         parameters.addValue("overnightStayStatusId", "OVERNIGHT_STAY_STATUS.PENDING");
 
         return njdbc.update(query, parameters) > 0;
