@@ -1,7 +1,6 @@
-package hr.fer.zpr.infsus.backend.repository;
+package hr.fer.zpr.infsus.backend.features.clients;
 
-import hr.fer.zpr.infsus.backend.model.Client;
-import hr.fer.zpr.infsus.backend.model.ClientUpdate;
+import hr.fer.zpr.infsus.backend.features.clients.data.Client;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -13,11 +12,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ClientRepository {
+public class ClientsRepository {
 
     private final NamedParameterJdbcTemplate njdbc;
 
-    public ClientRepository(@Qualifier("NamedParameterJdbcTemplate") NamedParameterJdbcTemplate njdbc) {
+    public ClientsRepository(@Qualifier("NamedParameterJdbcTemplate") NamedParameterJdbcTemplate njdbc) {
         this.njdbc = njdbc;
     }
 
@@ -79,7 +78,25 @@ public class ClientRepository {
         return keyHolder.getKey().longValue();
     }
 
-    public boolean updateClient(ClientUpdate clientUpdate) {
+    public Long insertClient(Client client) {
+        String query = """
+                INSERT INTO 
+                    client (client_national_id, client_phone_number, client_first_name, client_last_name)
+                VALUES 
+                    (:clientNationalId, :clientPhoneNumber, :clientFirstName, :clientLastName)
+                """;
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("clientNationalId", client.getClientNationalId());
+        parameters.addValue("clientPhoneNumber", client.getClientPhoneNumber());
+        parameters.addValue("clientFirstName", client.getClientFirstName());
+        parameters.addValue("clientLastName", client.getClientLastName());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        njdbc.update(query, parameters, keyHolder);
+        return keyHolder.getKey().longValue();
+    }
+
+    public boolean updateClient(Client client) {
         String query = """
                 UPDATE 
                     client
@@ -91,10 +108,10 @@ public class ClientRepository {
                     client_id = :clientId
                 """;
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("clientId", clientUpdate.getClientId());
-        parameters.addValue("clientPhoneNumber", clientUpdate.getClientPhoneNumber());
-        parameters.addValue("clientFirstName", clientUpdate.getClientFirstName());
-        parameters.addValue("clientLastName", clientUpdate.getClientLastName());
+        parameters.addValue("clientId", client.getClientId());
+        parameters.addValue("clientPhoneNumber", client.getClientPhoneNumber());
+        parameters.addValue("clientFirstName", client.getClientFirstName());
+        parameters.addValue("clientLastName", client.getClientLastName());
 
         return njdbc.update(query, parameters) > 0;
     }

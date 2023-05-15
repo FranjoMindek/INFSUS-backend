@@ -1,12 +1,10 @@
-package hr.fer.zpr.infsus.backend.model;
+package hr.fer.zpr.infsus.backend.features.clients.data;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Value;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Value
+@Builder
 public class Client {
     Long clientId;
     String clientNationalId;
