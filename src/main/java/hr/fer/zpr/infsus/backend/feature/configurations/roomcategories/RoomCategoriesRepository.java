@@ -1,6 +1,6 @@
 package hr.fer.zpr.infsus.backend.feature.configurations.roomcategories;
 
-import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.data.RoomCategory;
+import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.model.RoomCategory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

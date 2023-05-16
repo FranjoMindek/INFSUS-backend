@@ -1,7 +1,7 @@
 package hr.fer.zpr.infsus.backend.feature.overnightstays;
 
-import hr.fer.zpr.infsus.backend.feature.overnightstays.data.OvernightStayDTO;
-import hr.fer.zpr.infsus.backend.feature.overnightstays.data.OvernightStayInsertDTO;
+import hr.fer.zpr.infsus.backend.feature.overnightstays.dto.OvernightStayDTO;
+import hr.fer.zpr.infsus.backend.feature.overnightstays.dto.OvernightStayInsertDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +19,9 @@ public class OvernightStaysController {
         return this.overnightStaysService.getOvernightStays();
     }
 
-    @GetMapping("/overnight-stays/{overnightStaysId}")
-    public OvernightStayDTO getOvernightStayById(@PathVariable Long overnightStaysId) {
-        return this.overnightStaysService.getOvernightStayById(overnightStaysId);
+    @GetMapping("/overnight-stays/{id}")
+    public OvernightStayDTO getOvernightStayById(@PathVariable Long id) {
+        return this.overnightStaysService.getOvernightStayById(id);
     }
 
     @PostMapping("/overnight-stays")
@@ -29,8 +29,8 @@ public class OvernightStaysController {
         return this.overnightStaysService.insertOvernightStay(overnightStayInsertDTO);
     }
 
-    @PutMapping("/overnight-stays/{overnightStaysId}")
-    public boolean updateOvernightStay(@PathVariable Long overnightStaysId,
+    @PutMapping("/overnight-stays/{id}")
+    public boolean updateOvernightStay(@PathVariable Long id,
                               @RequestBody OvernightStayDTO overnightStayDTO) {
         return this.overnightStaysService.updateOvernightStay(overnightStayDTO);
     }

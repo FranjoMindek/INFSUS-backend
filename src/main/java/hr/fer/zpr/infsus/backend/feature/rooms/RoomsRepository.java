@@ -1,6 +1,6 @@
 package hr.fer.zpr.infsus.backend.feature.rooms;
 
-import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.data.RoomCategory;
+import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.model.RoomCategory;
 import hr.fer.zpr.infsus.backend.feature.rooms.model.DetailedRoom;
 import hr.fer.zpr.infsus.backend.feature.rooms.model.Room;
 import org.springframework.beans.factory.annotation.Qualifier;

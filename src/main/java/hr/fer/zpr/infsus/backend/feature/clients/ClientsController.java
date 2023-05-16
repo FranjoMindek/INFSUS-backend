@@ -1,6 +1,7 @@
 package hr.fer.zpr.infsus.backend.feature.clients;
 
-import hr.fer.zpr.infsus.backend.feature.clients.data.ClientDTO;
+import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientDTO;
+import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsertDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,9 @@ public class ClientsController {
         return this.clientsService.getClients();
     }
 
-    @GetMapping("/clients/{clientId}")
-    public ClientDTO getClientById(@PathVariable Long clientId) {
-        return this.clientsService.getClientById(clientId);
+    @GetMapping("/clients/{id}")
+    public ClientDTO getClientById(@PathVariable Long id) {
+        return this.clientsService.getClientById(id);
     }
 
     @GetMapping("/clients/")
@@ -29,18 +30,18 @@ public class ClientsController {
     }
 
     @PostMapping("/clients")
-    public Long insertClient(@RequestBody ClientDTO client) {
+    public Long insertClient(@RequestBody ClientInsertDTO client) {
         return this.clientsService.insertClient(client);
     }
 
-    @PutMapping("/clients/{clientId}")
-    public boolean updateClient(@PathVariable Long clientId,
+    @PutMapping("/clients/{id}")
+    public boolean updateClient(@PathVariable Long id,
                                 @RequestBody ClientDTO clientDTO) {
         return this.clientsService.updateClient(clientDTO);
     }
 
-    @DeleteMapping("/clients/{clientId}")
-    public boolean deleteClient(@PathVariable Long clientId) {
-        return this.clientsService.deleteClient(clientId);
+    @DeleteMapping("/clients/{id}")
+    public boolean deleteClient(@PathVariable Long id) {
+        return this.clientsService.deleteClient(id);
     }
 }

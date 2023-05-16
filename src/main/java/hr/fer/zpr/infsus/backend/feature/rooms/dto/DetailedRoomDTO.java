@@ -1,6 +1,6 @@
 package hr.fer.zpr.infsus.backend.feature.rooms.dto;
 
-import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.data.RoomCategoryDTO;
+import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.dto.RoomCategoryDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

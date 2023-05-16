@@ -1,11 +1,8 @@
 package hr.fer.zpr.infsus.backend.feature.overnightstays;
 
 import hr.fer.zpr.infsus.backend.feature.clients.ClientsService;
-import hr.fer.zpr.infsus.backend.feature.clients.data.Client;
-import hr.fer.zpr.infsus.backend.feature.overnightstays.data.OvernightStay;
-import hr.fer.zpr.infsus.backend.feature.overnightstays.data.OvernightStayDTO;
-import hr.fer.zpr.infsus.backend.feature.overnightstays.data.OvernightStayInsertDTO;
-import hr.fer.zpr.infsus.backend.feature.overnightstays.data.OvernightStaysMapper;
+import hr.fer.zpr.infsus.backend.feature.overnightstays.dto.OvernightStayDTO;
+import hr.fer.zpr.infsus.backend.feature.overnightstays.dto.OvernightStayInsertDTO;
 import hr.fer.zpr.infsus.backend.feature.rooms.RoomsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,23 +28,11 @@ public class OvernightStaysService {
     }
 
     public boolean insertOvernightStay(OvernightStayInsertDTO overnightStayInsertDTO) {
-        Long clientId = this.clientsService.insertClientIfNew(
-                Client.builder()
-                        .clientNationalId(overnightStayInsertDTO.getClientNationalId())
-                        .clientPhoneNumber(overnightStayInsertDTO.getClientPhoneNumber())
-                        .clientFirstName(overnightStayInsertDTO.getClientFirstName())
-                        .clientLastName(overnightStayInsertDTO.getClientLastName())
-                        .build());
+        Long clientId = this.clientsService.insertClientIfNew(overnightStayInsertDTO.getClientInsertDTO());
         this.roomsService.updateRoomStatus(overnightStayInsertDTO.getRoomId(), "ROOM_STATUS.OCCUPIED");
 
         return this.overnightStaysRepository.insertOvernightStay(
-                OvernightStay.builder()
-                        .clientId(clientId)
-                        .roomId(overnightStayInsertDTO.getRoomId())
-                        .overnightStayDateFrom(overnightStayInsertDTO.getOvernightStayDateFrom())
-                        .overnightStayDateTo(overnightStayInsertDTO.getOvernightStayDateTo())
-                        .build()
-        );
+                OvernightStaysMapper.toEntity(overnightStayInsertDTO, clientId));
     }
 
     public boolean updateOvernightStay(OvernightStayDTO overnightStayDTO) {

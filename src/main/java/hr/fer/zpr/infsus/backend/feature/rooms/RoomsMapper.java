@@ -1,6 +1,6 @@
 package hr.fer.zpr.infsus.backend.feature.rooms;
 
-import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.data.RoomCategoriesMapper;
+import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.RoomCategoriesMapper;
 import hr.fer.zpr.infsus.backend.feature.rooms.dto.DetailedRoomDTO;
 import hr.fer.zpr.infsus.backend.feature.rooms.dto.RoomDTO;
 import hr.fer.zpr.infsus.backend.feature.rooms.dto.RoomInsertDTO;

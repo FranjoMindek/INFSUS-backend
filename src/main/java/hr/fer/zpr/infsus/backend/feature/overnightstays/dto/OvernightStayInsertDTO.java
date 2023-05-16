@@ -1,5 +1,6 @@
-package hr.fer.zpr.infsus.backend.feature.overnightstays.data;
+package hr.fer.zpr.infsus.backend.feature.overnightstays.dto;
 
+import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsertDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,10 +9,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class OvernightStayInsertDTO {
-    String clientNationalId;
-    String clientFirstName;
-    String clientLastName;
-    String clientPhoneNumber;
+    ClientInsertDTO clientInsertDTO;
     Long roomId;
     Date overnightStayDateFrom;
     Date overnightStayDateTo;

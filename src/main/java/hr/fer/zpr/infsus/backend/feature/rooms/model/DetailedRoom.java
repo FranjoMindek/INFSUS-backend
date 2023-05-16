@@ -1,6 +1,6 @@
 package hr.fer.zpr.infsus.backend.feature.rooms.model;
 
-import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.data.RoomCategory;
+import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.model.RoomCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

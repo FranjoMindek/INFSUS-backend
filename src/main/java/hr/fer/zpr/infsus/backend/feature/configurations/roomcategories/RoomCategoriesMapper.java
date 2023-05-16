@@ -1,4 +1,7 @@
-package hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.data;
+package hr.fer.zpr.infsus.backend.feature.configurations.roomcategories;
+
+import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.dto.RoomCategoryDTO;
+import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.model.RoomCategory;
 
 public class RoomCategoriesMapper {
 

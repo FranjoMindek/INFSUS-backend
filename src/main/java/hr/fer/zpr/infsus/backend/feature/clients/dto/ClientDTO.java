@@ -1,4 +1,4 @@
-package hr.fer.zpr.infsus.backend.feature.clients.data;
+package hr.fer.zpr.infsus.backend.feature.clients.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

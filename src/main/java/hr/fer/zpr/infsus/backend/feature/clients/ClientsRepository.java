@@ -1,6 +1,6 @@
 package hr.fer.zpr.infsus.backend.feature.clients;
 
-import hr.fer.zpr.infsus.backend.feature.clients.data.Client;
+import hr.fer.zpr.infsus.backend.feature.clients.model.Client;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

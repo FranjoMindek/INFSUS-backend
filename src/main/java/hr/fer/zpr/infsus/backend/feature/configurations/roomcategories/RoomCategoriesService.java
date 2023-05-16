@@ -1,7 +1,6 @@
 package hr.fer.zpr.infsus.backend.feature.configurations.roomcategories;
 
-import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.data.RoomCategoriesMapper;
-import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.data.RoomCategoryDTO;
+import hr.fer.zpr.infsus.backend.feature.configurations.roomcategories.dto.RoomCategoryDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

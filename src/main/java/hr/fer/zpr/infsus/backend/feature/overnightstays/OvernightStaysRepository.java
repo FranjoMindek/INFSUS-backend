@@ -1,6 +1,6 @@
 package hr.fer.zpr.infsus.backend.feature.overnightstays;
 
-import hr.fer.zpr.infsus.backend.feature.overnightstays.data.OvernightStay;
+import hr.fer.zpr.infsus.backend.feature.overnightstays.model.OvernightStay;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

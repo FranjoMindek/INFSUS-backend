@@ -1,6 +1,7 @@
 package hr.fer.zpr.infsus.backend.feature.reservations;
 
 import hr.fer.zpr.infsus.backend.feature.reservations.dto.ReservationDTO;
+import hr.fer.zpr.infsus.backend.feature.reservations.dto.ReservationInsertDTO;
 import hr.fer.zpr.infsus.backend.feature.reservations.model.Reservation;
 
 public class ReservationsMapper {
@@ -14,6 +15,15 @@ public class ReservationsMapper {
         entity.setReservationDateTo(dto.getReservationDateTo());
         entity.setReservationStatusId(dto.getReservationStatusId());
         return entity;
+    }
+
+    public static Reservation toEntity(ReservationInsertDTO dto, Long clientId) {
+        return Reservation.builder()
+                .clientId(clientId)
+                .roomId(dto.getRoomId())
+                .reservationDateFrom(dto.getReservationDateFrom())
+                .reservationDateTo(dto.getReservationDateTo())
+                .build();
     }
 
     public static ReservationDTO toDTO(Reservation entity) {

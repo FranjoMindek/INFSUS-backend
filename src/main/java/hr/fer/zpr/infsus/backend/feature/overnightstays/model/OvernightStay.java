@@ -1,4 +1,4 @@
-package hr.fer.zpr.infsus.backend.feature.overnightstays.data;
+package hr.fer.zpr.infsus.backend.feature.overnightstays.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package hr.fer.zpr.infsus.backend.feature.overnightstays.data;
+package hr.fer.zpr.infsus.backend.feature.overnightstays.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
