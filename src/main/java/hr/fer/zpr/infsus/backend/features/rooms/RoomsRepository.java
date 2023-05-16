@@ -1,13 +1,17 @@
 package hr.fer.zpr.infsus.backend.features.rooms;
 
+import hr.fer.zpr.infsus.backend.features.configurations.roomcategories.data.RoomCategory;
 import hr.fer.zpr.infsus.backend.features.rooms.data.Room;
 import hr.fer.zpr.infsus.backend.features.rooms.data.RoomDetailed;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -33,13 +37,16 @@ public class RoomsRepository {
     public List<RoomDetailed> getRoomsDetailed() {
         String query = """
                 SELECT 
-                    r.*,
-                    s.status_name,
+                    r.room_id,
+                    r.room_code,
+                    r.room_category_id,
+                    r.room_floor,
+                    r.room_status_id,
+                    rc.room_category_id,
+                    rc.room_category_name,
                     rc.room_category_price,
                     rc.room_bed_category_id,
-                    rc.room_quality_category_id,
-                    rbc.room_bed_category_name,
-                    rqc.room_quality_category_name
+                    rc.room_quality_category_id
                 FROM 
                     room r
                     JOIN status s
@@ -52,7 +59,8 @@ public class RoomsRepository {
                         ON rqc.room_quality_category_id = rc.room_quality_category_id
                 """;
 
-        return njdbc.query(query, BeanPropertyRowMapper.newInstance(RoomDetailed.class));
+        List<RoomDetailed> lista = njdbc.query(query, new RoomDetailedRowMapper());
+        return lista;
     }
 
     public RoomDetailed getRoomDetailedById(Long roomId) {
@@ -148,4 +156,17 @@ public class RoomsRepository {
 
         return this.njdbc.update(query, parameters) > 0;
     }
+
+    public static class RoomDetailedRowMapper implements RowMapper<RoomDetailed> {
+        @Override
+        public RoomDetailed mapRow(ResultSet rs, int rowNum) throws SQLException {
+            RoomDetailed roomDetailed = new RoomDetailed();
+            Room room = (new BeanPropertyRowMapper<>(Room.class)).mapRow(rs,rowNum);
+            RoomCategory roomCategory = (new BeanPropertyRowMapper<>(RoomCategory.class)).mapRow(rs,rowNum);
+            roomDetailed.setRoom(room);
+            roomDetailed.setRoomCategory(roomCategory);
+            return roomDetailed;
+        }
+    }
 }
+

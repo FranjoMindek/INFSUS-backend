@@ -2,6 +2,7 @@ package hr.fer.zpr.infsus.backend.features.clients;
 
 import hr.fer.zpr.infsus.backend.features.clients.data.Client;
 import hr.fer.zpr.infsus.backend.features.clients.data.ClientDTO;
+import hr.fer.zpr.infsus.backend.features.clients.data.ClientsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

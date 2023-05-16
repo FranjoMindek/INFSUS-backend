@@ -5,6 +5,7 @@ import hr.fer.zpr.infsus.backend.features.clients.data.Client;
 import hr.fer.zpr.infsus.backend.features.reservations.data.Reservation;
 import hr.fer.zpr.infsus.backend.features.reservations.data.ReservationDTO;
 import hr.fer.zpr.infsus.backend.features.reservations.data.ReservationInsertDTO;
+import hr.fer.zpr.infsus.backend.features.reservations.data.ReservationsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

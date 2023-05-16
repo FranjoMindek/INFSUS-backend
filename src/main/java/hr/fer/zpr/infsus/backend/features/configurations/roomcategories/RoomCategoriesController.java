@@ -1,6 +1,6 @@
 package hr.fer.zpr.infsus.backend.features.configurations.roomcategories;
 
-import hr.fer.zpr.infsus.backend.features.configurations.roomcategories.data.RoomCategory;
+import hr.fer.zpr.infsus.backend.features.configurations.roomcategories.data.RoomCategoryDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ public class RoomCategoriesController {
     private final RoomCategoriesService roomCategoriesService;
 
     @GetMapping("/room-categories")
-    public List<RoomCategory> getRoomCategories() {
+    public List<RoomCategoryDTO> getRoomCategories() {
         return this.roomCategoriesService.getRoomCategories();
     }
 
@@ -21,7 +21,7 @@ public class RoomCategoriesController {
     @PutMapping("/room-categories/{id}")
     public boolean insertRoomCategory(
             @PathVariable String id, // could technically have DTO which doesn't include id to reduce network traffic
-            @RequestBody RoomCategory roomCategory) {
+            @RequestBody RoomCategoryDTO roomCategory) {
         return this.roomCategoriesService.insertUpdateCategory(roomCategory);
     }
 

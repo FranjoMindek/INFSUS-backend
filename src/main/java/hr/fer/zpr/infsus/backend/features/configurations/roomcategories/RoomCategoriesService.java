@@ -1,6 +1,7 @@
 package hr.fer.zpr.infsus.backend.features.configurations.roomcategories;
 
-import hr.fer.zpr.infsus.backend.features.configurations.roomcategories.data.RoomCategory;
+import hr.fer.zpr.infsus.backend.features.configurations.roomcategories.data.RoomCategoriesMapper;
+import hr.fer.zpr.infsus.backend.features.configurations.roomcategories.data.RoomCategoryDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +12,22 @@ import java.util.List;
 public class RoomCategoriesService {
     private final RoomCategoriesRepository roomCategoriesRepository;
 
-    public List<RoomCategory> getRoomCategories() {
-        return this.roomCategoriesRepository.getRoomCategories();
+    public List<RoomCategoryDTO> getRoomCategories() {
+        return this.roomCategoriesRepository.getRoomCategories().stream()
+                .map(RoomCategoriesMapper::toDTO)
+                .toList();
     }
 
-    public boolean insertRoomCategory(RoomCategory roomCategory) {
-        return this.roomCategoriesRepository.insertRoomCategory(roomCategory);
+    public boolean insertRoomCategory(RoomCategoryDTO roomCategoryDTO) {
+        return this.roomCategoriesRepository.insertRoomCategory(RoomCategoriesMapper.toEntity(roomCategoryDTO));
     }
 
-    public boolean updateRoomCategory(RoomCategory roomCategory) {
-        return this.roomCategoriesRepository.updateRoomCategory(roomCategory);
+    public boolean updateRoomCategory(RoomCategoryDTO roomCategoryDTO) {
+        return this.roomCategoriesRepository.updateRoomCategory(RoomCategoriesMapper.toEntity(roomCategoryDTO));
     }
 
-    public boolean insertUpdateCategory(RoomCategory roomCategory) {
-        return this.roomCategoriesRepository.insertUpdateRoomCategory(roomCategory);
+    public boolean insertUpdateCategory(RoomCategoryDTO roomCategoryDTO) {
+        return this.roomCategoriesRepository.insertUpdateRoomCategory(RoomCategoriesMapper.toEntity(roomCategoryDTO));
     }
 
     public boolean deleteRoomCategory(String id) {

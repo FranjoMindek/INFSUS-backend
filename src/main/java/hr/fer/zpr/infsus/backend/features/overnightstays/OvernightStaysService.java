@@ -5,6 +5,7 @@ import hr.fer.zpr.infsus.backend.features.clients.data.Client;
 import hr.fer.zpr.infsus.backend.features.overnightstays.data.OvernightStay;
 import hr.fer.zpr.infsus.backend.features.overnightstays.data.OvernightStayDTO;
 import hr.fer.zpr.infsus.backend.features.overnightstays.data.OvernightStayInsertDTO;
+import hr.fer.zpr.infsus.backend.features.overnightstays.data.OvernightStaysMapper;
 import hr.fer.zpr.infsus.backend.features.rooms.RoomsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

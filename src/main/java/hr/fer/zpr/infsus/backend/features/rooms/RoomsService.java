@@ -2,6 +2,7 @@ package hr.fer.zpr.infsus.backend.features.rooms;
 
 import hr.fer.zpr.infsus.backend.features.rooms.data.RoomDTO;
 import hr.fer.zpr.infsus.backend.features.rooms.data.RoomDetailedDTO;
+import hr.fer.zpr.infsus.backend.features.rooms.data.RoomsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

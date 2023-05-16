@@ -1,20 +1,14 @@
 package hr.fer.zpr.infsus.backend.features.rooms.data;
 
+import hr.fer.zpr.infsus.backend.features.configurations.roomcategories.data.RoomCategoryDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @NoArgsConstructor
 @Data
 public class RoomDetailedDTO {
-    Long roomId;
-    String roomCode;
-    Integer roomFloor;
-    String roomStatusId;
-    String roomCategoryId;
-    String statusName;
-    String roomCategoryPrice;
-    String roomBedCategoryId;
-    String roomQualityCategoryId;
-    String roomBedCategoryName;
-    String roomQualityCategoryName;
+    RoomDTO room;
+    RoomCategoryDTO roomCategory;
 }
+
