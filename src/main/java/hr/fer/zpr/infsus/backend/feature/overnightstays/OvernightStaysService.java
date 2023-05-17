@@ -29,7 +29,7 @@ public class OvernightStaysService {
 
     public boolean insertOvernightStay(OvernightStayInsertDTO overnightStayInsertDTO) {
         Long clientId = this.clientsService.insertClientIfNew(overnightStayInsertDTO.getClientInsertDTO());
-        this.roomsService.updateRoomStatus(overnightStayInsertDTO.getRoomId(), "ROOM_STATUS.OCCUPIED");
+        this.roomsService.updateRoomStatus(overnightStayInsertDTO.getRoomId(),  "ROOM_STATUS.OCCUPIED");
 
         return this.overnightStaysRepository.insertOvernightStay(
                 OvernightStaysMapper.toEntity(overnightStayInsertDTO, clientId));
