@@ -31,4 +31,21 @@ public class CodebooksService {
         return map;
     }
 
+    public List<Codebook> getCodebook(String codebook) {
+        return this.codebooksRepository.getCodebookTemplate(CodebookEnum.valueOf(codebook));
+    }
+
+
+    public Map<String, List<Codebook>> getCodebooksByEnum(List<CodebookEnum> codebooks) {
+        Map<String, List<Codebook>> map = new HashMap<>();
+        for (CodebookEnum codebook : codebooks) {
+            map.put(codebook.getName(), this.codebooksRepository.getCodebookTemplate(codebook));
+        }
+        return map;
+    }
+
+    public List<Codebook> getCodebookByEnum(CodebookEnum codebook) {
+        return this.codebooksRepository.getCodebookTemplate(codebook);
+    }
+
 }
