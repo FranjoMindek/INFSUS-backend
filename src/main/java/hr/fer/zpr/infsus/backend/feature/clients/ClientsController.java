@@ -3,8 +3,10 @@ package hr.fer.zpr.infsus.backend.feature.clients;
 import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientDTO;
 import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsertDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -15,33 +17,39 @@ public class ClientsController {
     private final ClientsService clientsService;
 
     @GetMapping("/clients")
-    public List<ClientDTO> getClients() {
-        return this.clientsService.getClients();
+    public ResponseEntity<List<ClientDTO> >getClients() {
+        return ResponseEntity.ok().body(this.clientsService.getClients());
     }
 
     @GetMapping("/clients/{id}")
-    public ClientDTO getClientById(@PathVariable Long id) {
-        return this.clientsService.getClientById(id);
+    public ResponseEntity<ClientDTO> getClientById(@PathVariable Long id) {
+        ClientDTO dto = this.clientsService.getClientById(id);
+        if (dto == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(dto);
     }
 
     @GetMapping("/clients/")
-    public ClientDTO getClientByNationalId(@RequestParam String clientNationalId) {
-        return this.clientsService.getClientByNationalId(clientNationalId);
+    public ResponseEntity<ClientDTO> getClientByNationalId(@RequestParam String clientNationalId) {
+        ClientDTO dto = this.clientsService.getClientByNationalId(clientNationalId);
+        if (dto == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(dto);
     }
 
     @PostMapping("/clients")
-    public Long insertClient(@RequestBody ClientInsertDTO client) {
-        return this.clientsService.insertClient(client);
+    public ResponseEntity<?> insertClient(@RequestBody ClientInsertDTO client) {
+        Long id = this.clientsService.insertClient(client);
+        return ResponseEntity.created(URI.create("api/clients/" + id)).build();
     }
 
     @PutMapping("/clients/{id}")
-    public boolean updateClient(@PathVariable Long id,
-                                @RequestBody ClientDTO clientDTO) {
-        return this.clientsService.updateClient(clientDTO);
+    public ResponseEntity<?> updateClient(@PathVariable Long id, @RequestBody ClientDTO clientDTO) {
+        if (this.clientsService.updateClient(clientDTO)) return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/clients/{id}")
-    public boolean deleteClient(@PathVariable Long id) {
-        return this.clientsService.deleteClient(id);
+    public ResponseEntity<?> deleteClient(@PathVariable Long id) {
+        if (this.clientsService.deleteClient(id)) return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
     }
 }
