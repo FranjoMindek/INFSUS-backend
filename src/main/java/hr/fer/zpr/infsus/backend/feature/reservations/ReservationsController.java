@@ -18,14 +18,14 @@ public class ReservationsController {
 
     @GetMapping("/reservations")
     public ResponseEntity<List<ReservationDTO>> getReservations() {
-        return ResponseEntity.ok().body(this.reservationsService.getReservations());
+        return ResponseEntity.ok(this.reservationsService.getReservations());
     }
 
     @GetMapping("/reservations/{reservationId}")
     public ResponseEntity<ReservationDTO> getReservationById(@PathVariable Long reservationId) {
         ReservationDTO dto = this.reservationsService.getReservationById(reservationId);
         if (dto == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok().body(dto);
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping("/reservations")

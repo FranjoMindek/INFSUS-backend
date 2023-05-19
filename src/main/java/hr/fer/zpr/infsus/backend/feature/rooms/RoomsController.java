@@ -19,14 +19,14 @@ public class RoomsController {
 
     @GetMapping("/detailed-rooms")
     public ResponseEntity<List<DetailedRoomDTO>> getDetailedRooms() {
-        return ResponseEntity.ok().body(this.roomsService.getDetailedRooms());
+        return ResponseEntity.ok(this.roomsService.getDetailedRooms());
     }
 
     @GetMapping("/detailed-rooms/{id}")
     public ResponseEntity<DetailedRoomDTO> getDetailedRoomById(@PathVariable Long id) {
         DetailedRoomDTO dto = this.roomsService.getDetailedRoomById(id);
         if (dto == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok().body(dto);
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping("/rooms")

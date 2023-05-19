@@ -18,14 +18,14 @@ public class ClientsController {
 
     @GetMapping("/clients")
     public ResponseEntity<List<ClientDTO> >getClients() {
-        return ResponseEntity.ok().body(this.clientsService.getClients());
+        return ResponseEntity.ok(this.clientsService.getClients());
     }
 
     @GetMapping("/clients/{id}")
     public ResponseEntity<ClientDTO> getClientById(@PathVariable Long id) {
         ClientDTO dto = this.clientsService.getClientById(id);
         if (dto == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok().body(dto);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/clients/")

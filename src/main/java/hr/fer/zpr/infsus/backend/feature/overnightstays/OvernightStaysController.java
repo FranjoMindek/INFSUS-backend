@@ -18,14 +18,14 @@ public class OvernightStaysController {
 
     @GetMapping("/overnight-stays")
     public ResponseEntity<List<OvernightStayDTO>> getOvernightStays() {
-        return ResponseEntity.ok().body(this.overnightStaysService.getOvernightStays());
+        return ResponseEntity.ok(this.overnightStaysService.getOvernightStays());
     }
 
     @GetMapping("/overnight-stays/{id}")
     public ResponseEntity<OvernightStayDTO> getOvernightStayById(@PathVariable Long id) {
         OvernightStayDTO dto = this.overnightStaysService.getOvernightStayById(id);
         if (dto == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok().body(dto);
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping("/overnight-stays")
