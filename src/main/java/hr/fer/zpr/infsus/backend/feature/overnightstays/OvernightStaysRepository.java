@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -44,7 +46,7 @@ public class OvernightStaysRepository {
         return njdbc.queryForObject(query, parameters, BeanPropertyRowMapper.newInstance(OvernightStay.class));
     }
 
-    public boolean insertOvernightStay(OvernightStay overnightStay) {
+    public Long insertOvernightStay(OvernightStay overnightStay) {
         String query = """
                 INSERT INTO
                     overnight_stay (client_id, room_id, overnight_stay_date_from, overnight_stay_date_to, overnight_stay_status_id)
@@ -57,8 +59,10 @@ public class OvernightStaysRepository {
         parameters.addValue("overnightStayDateFrom", overnightStay.getOvernightStayDateFrom());
         parameters.addValue("overnightStayDateTo", overnightStay.getOvernightStayDateTo());
         parameters.addValue("overnightStayStatusId", "OVERNIGHT_STAY_STATUS.PENDING");
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        return njdbc.update(query, parameters) > 0;
+        njdbc.update(query, parameters, keyHolder);
+        return keyHolder.getKeyAs(Long.class);
     }
 
     public boolean updateOvernightStay(OvernightStay overnightStay) {

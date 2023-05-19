@@ -3,8 +3,10 @@ package hr.fer.zpr.infsus.backend.feature.overnightstays;
 import hr.fer.zpr.infsus.backend.feature.overnightstays.dto.OvernightStayDTO;
 import hr.fer.zpr.infsus.backend.feature.overnightstays.dto.OvernightStayInsertDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -15,28 +17,33 @@ public class OvernightStaysController {
     private final OvernightStaysService overnightStaysService;
 
     @GetMapping("/overnight-stays")
-    public List<OvernightStayDTO> getOvernightStays() {
-        return this.overnightStaysService.getOvernightStays();
+    public ResponseEntity<List<OvernightStayDTO>> getOvernightStays() {
+        return ResponseEntity.ok().body(this.overnightStaysService.getOvernightStays());
     }
 
     @GetMapping("/overnight-stays/{id}")
-    public OvernightStayDTO getOvernightStayById(@PathVariable Long id) {
-        return this.overnightStaysService.getOvernightStayById(id);
+    public ResponseEntity<OvernightStayDTO> getOvernightStayById(@PathVariable Long id) {
+        OvernightStayDTO dto = this.overnightStaysService.getOvernightStayById(id);
+        if (dto == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(dto);
     }
 
     @PostMapping("/overnight-stays")
-    public boolean insertOvernightStay(@RequestBody OvernightStayInsertDTO overnightStayInsertDTO) {
-        return this.overnightStaysService.insertOvernightStay(overnightStayInsertDTO);
+    public ResponseEntity<?> insertOvernightStay(@RequestBody OvernightStayInsertDTO overnightStayInsertDTO) {
+        Long id = this.overnightStaysService.insertOvernightStay(overnightStayInsertDTO);
+        return ResponseEntity.created(URI.create("api/overnight-stays/" + id)).build();
     }
 
     @PutMapping("/overnight-stays/{id}")
-    public boolean updateOvernightStay(@PathVariable Long id,
+    public ResponseEntity<?> updateOvernightStay(@PathVariable Long id,
                               @RequestBody OvernightStayDTO overnightStayDTO) {
-        return this.overnightStaysService.updateOvernightStay(overnightStayDTO);
+        if (this.overnightStaysService.updateOvernightStay(overnightStayDTO)) return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/overnight-stays/{overnightStaysId}")
-    public boolean deleteOvernightStay(@PathVariable Long overnightStaysId) {
-        return this.overnightStaysService.deleteOvernightStay(overnightStaysId);
+    public ResponseEntity<?> deleteOvernightStay(@PathVariable Long overnightStaysId) {
+        if (this.overnightStaysService.deleteOvernightStay(overnightStaysId)) return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
     }
 }
