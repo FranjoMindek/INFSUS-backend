@@ -34,7 +34,7 @@ public class RoomsService {
         return this.roomsRepository.updateRoomStatus(roomId, roomStatusId);
     }
 
-    public boolean insertRoom(RoomInsertDTO roomInsertDTO) {
+    public Long insertRoom(RoomInsertDTO roomInsertDTO) {
         return this.roomsRepository.insertRoom(RoomsMapper.toEntity(roomInsertDTO));
     }
 

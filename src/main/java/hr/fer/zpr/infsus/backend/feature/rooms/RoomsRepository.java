@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -82,7 +84,7 @@ public class RoomsRepository {
         return njdbc.queryForObject(query, parameters, new RoomDetailedRowMapper());
     }
 
-    public boolean insertRoom(Room room) {
+    public Long insertRoom(Room room) {
         String query = """
                 INSERT INTO 
                     room (room_code, room_floor, room_status_id, room_category_id)
@@ -94,8 +96,10 @@ public class RoomsRepository {
         parameters.addValue("roomFloor", room.getRoomFloor());
         parameters.addValue("roomStatusId", room.getRoomStatusId());
         parameters.addValue("roomCategoryId", room.getRoomCategoryId());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        return njdbc.update(query, parameters) > 0;
+        njdbc.update(query, parameters, keyHolder);
+        return keyHolder.getKeyAs(Long.class);
     }
     public boolean updateRoom(Room room) {
         String query = """
