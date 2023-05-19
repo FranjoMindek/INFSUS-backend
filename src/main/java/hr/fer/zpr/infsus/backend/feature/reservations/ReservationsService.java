@@ -25,7 +25,7 @@ public class ReservationsService {
         return ReservationsMapper.toDTO(this.reservationsRepository.getReservationById(reservationId));
     }
 
-    public boolean insertReservation(ReservationInsertDTO reservationInsertDTO) {
+    public Long insertReservation(ReservationInsertDTO reservationInsertDTO) {
         Long clientId = this.clientsService.insertClientIfNew(reservationInsertDTO.getClientInsertDTO());
 
         return this.reservationsRepository.insertReservation(

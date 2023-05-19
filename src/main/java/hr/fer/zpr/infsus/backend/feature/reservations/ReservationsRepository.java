@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -60,7 +62,7 @@ public class ReservationsRepository {
 //        return njdbc.update(query, parameters) > 0;
 //    }
 
-    public boolean insertReservation(Reservation reservation) {
+    public Long insertReservation(Reservation reservation) {
         String query = """
                 INSERT INTO
                     reservation (client_id, room_id, reservation_date_from, reservation_date_to, reservation_status_id)
@@ -73,8 +75,10 @@ public class ReservationsRepository {
         parameters.addValue("reservationDateFrom", reservation.getReservationDateFrom());
         parameters.addValue("reservationDateTo", reservation.getReservationDateTo());
         parameters.addValue("reservationStatusId", "RESERVATION_STATUS.PENDING");
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        return njdbc.update(query, parameters) > 0;
+        njdbc.update(query, parameters, keyHolder);
+        return keyHolder.getKeyAs(Long.class);
     }
 
     public boolean updateReservation(Reservation reservation) {

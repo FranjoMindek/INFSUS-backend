@@ -3,8 +3,10 @@ package hr.fer.zpr.infsus.backend.feature.reservations;
 import hr.fer.zpr.infsus.backend.feature.reservations.dto.ReservationDTO;
 import hr.fer.zpr.infsus.backend.feature.reservations.dto.ReservationInsertDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -15,28 +17,33 @@ public class ReservationsController {
     private final ReservationsService reservationsService;
 
     @GetMapping("/reservations")
-    public List<ReservationDTO> getReservations() {
-        return this.reservationsService.getReservations();
+    public ResponseEntity<List<ReservationDTO>> getReservations() {
+        return ResponseEntity.ok().body(this.reservationsService.getReservations());
     }
 
     @GetMapping("/reservations/{reservationId}")
-    public ReservationDTO getReservationById(@PathVariable Long reservationId) {
-        return this.reservationsService.getReservationById(reservationId);
+    public ResponseEntity<ReservationDTO> getReservationById(@PathVariable Long reservationId) {
+        ReservationDTO dto = this.reservationsService.getReservationById(reservationId);
+        if (dto == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(dto);
     }
 
     @PostMapping("/reservations")
-    public boolean insertReservation(@RequestBody ReservationInsertDTO reservationInsert) {
-        return this.reservationsService.insertReservation(reservationInsert);
+    public ResponseEntity<?> insertReservation(@RequestBody ReservationInsertDTO reservationInsert) {
+        Long id = this.reservationsService.insertReservation(reservationInsert);
+        return ResponseEntity.created(URI.create("api/reservations/" + id)).build();
     }
 
     @PutMapping("/reservations/{reservationId}")
-    public boolean updateReservation(@PathVariable Long reservationId,
-                              @RequestBody ReservationDTO reservation) {
-        return this.reservationsService.updateReservation(reservation);
+    public ResponseEntity<?> updateReservation(@PathVariable Long reservationId,
+                                                    @RequestBody ReservationDTO reservation) {
+        if (this.reservationsService.updateReservation(reservation)) return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/reservations/{reservationId}")
-    public boolean deleteReservation(@PathVariable Long reservationId) {
-        return this.reservationsService.deleteReservation(reservationId);
+    public ResponseEntity<?> deleteReservation(@PathVariable Long reservationId) {
+        if (this.reservationsService.deleteReservation(reservationId)) return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
     }
 }
