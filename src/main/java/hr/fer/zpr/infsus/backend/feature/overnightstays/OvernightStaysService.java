@@ -28,7 +28,7 @@ public class OvernightStaysService {
     }
 
     public Long insertOvernightStay(OvernightStayInsertDTO overnightStayInsertDTO) {
-        Long clientId = this.clientsService.insertClientIfNew(overnightStayInsertDTO.getClientInsertDTO());
+        Long clientId = this.clientsService.insertClientIfNew(overnightStayInsertDTO.getClientInsert());
         this.roomsService.updateRoomStatus(overnightStayInsertDTO.getRoomId(),  "ROOM_STATUS.OCCUPIED");
 
         return this.overnightStaysRepository.insertOvernightStay(

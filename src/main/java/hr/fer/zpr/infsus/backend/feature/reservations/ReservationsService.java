@@ -26,7 +26,7 @@ public class ReservationsService {
     }
 
     public Long insertReservation(ReservationInsertDTO reservationInsertDTO) {
-        Long clientId = this.clientsService.insertClientIfNew(reservationInsertDTO.getClientInsertDTO());
+        Long clientId = this.clientsService.insertClientIfNew(reservationInsertDTO.getClientInsert());
 
         return this.reservationsRepository.insertReservation(
                 ReservationsMapper.toEntity(reservationInsertDTO, clientId));

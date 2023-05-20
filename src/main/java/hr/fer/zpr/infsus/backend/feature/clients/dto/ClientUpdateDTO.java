@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class ClientInsertDTO {
-    String clientNationalId;
+public class ClientUpdateDTO {
+    Long clientId;
     String clientPhoneNumber;
     String clientFirstName;
     String clientLastName;

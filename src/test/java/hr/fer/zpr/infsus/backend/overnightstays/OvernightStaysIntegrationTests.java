@@ -2,7 +2,7 @@ package hr.fer.zpr.infsus.backend.overnightstays;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.fer.zpr.infsus.backend.BackendApplication;
-import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsertDTO;
+import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsert;
 import hr.fer.zpr.infsus.backend.feature.overnightstays.OvernightStaysService;
 import hr.fer.zpr.infsus.backend.feature.overnightstays.dto.OvernightStayDTO;
 import hr.fer.zpr.infsus.backend.feature.overnightstays.dto.OvernightStayInsertDTO;
@@ -39,16 +39,16 @@ public class OvernightStaysIntegrationTests {
 
     @Test
     public void testShouldFindAndThenDeleteInsertedOvernightStay() throws Exception {
-        ClientInsertDTO clientInsertDTO = new ClientInsertDTO();
-        clientInsertDTO.setClientFirstName("Franjo");
-        clientInsertDTO.setClientLastName("Mindek");
-        clientInsertDTO.setClientPhoneNumber("123321123321");
-        clientInsertDTO.setClientNationalId("696969696969");
+        ClientInsert clientInsert = new ClientInsert();
+        clientInsert.setClientFirstName("Franjo");
+        clientInsert.setClientLastName("Mindek");
+        clientInsert.setClientPhoneNumber("123321123321");
+        clientInsert.setClientNationalId("696969696969");
         OvernightStayInsertDTO overnightStayInsertDTO = new OvernightStayInsertDTO();
         overnightStayInsertDTO.setRoomId(1L);
         overnightStayInsertDTO.setOvernightStayDateFrom(new Date());
         overnightStayInsertDTO.setOvernightStayDateTo(new Date());
-        overnightStayInsertDTO.setClientInsertDTO(clientInsertDTO);
+        overnightStayInsertDTO.setClientInsert(clientInsert);
 
         var response = mockMvc.perform(post("/api/overnight-stays")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -73,16 +73,16 @@ public class OvernightStaysIntegrationTests {
 
     @Test
     public void testShouldUpdateInsertedOvernightStay() throws Exception {
-        ClientInsertDTO clientInsertDTO = new ClientInsertDTO();
-        clientInsertDTO.setClientFirstName("Franjo");
-        clientInsertDTO.setClientLastName("Mindek");
-        clientInsertDTO.setClientPhoneNumber("123321123321");
-        clientInsertDTO.setClientNationalId("696969696969");
+        ClientInsert clientInsert = new ClientInsert();
+        clientInsert.setClientFirstName("Franjo");
+        clientInsert.setClientLastName("Mindek");
+        clientInsert.setClientPhoneNumber("123321123321");
+        clientInsert.setClientNationalId("696969696969");
         OvernightStayInsertDTO overnightStayInsertDTO = new OvernightStayInsertDTO();
         overnightStayInsertDTO.setRoomId(1L);
         overnightStayInsertDTO.setOvernightStayDateFrom(new Date());
         overnightStayInsertDTO.setOvernightStayDateTo(new Date());
-        overnightStayInsertDTO.setClientInsertDTO(clientInsertDTO);
+        overnightStayInsertDTO.setClientInsert(clientInsert);
 
         var postRespose = mockMvc.perform(post("/api/overnight-stays")
                         .contentType(MediaType.APPLICATION_JSON)
