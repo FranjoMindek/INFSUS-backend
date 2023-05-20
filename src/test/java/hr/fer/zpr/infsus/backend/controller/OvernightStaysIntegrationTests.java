@@ -3,7 +3,6 @@ package hr.fer.zpr.infsus.backend.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.fer.zpr.infsus.backend.BackendApplication;
 import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsertDTO;
-import hr.fer.zpr.infsus.backend.feature.overnightstays.OvernightStaysRepository;
 import hr.fer.zpr.infsus.backend.feature.overnightstays.OvernightStaysService;
 import hr.fer.zpr.infsus.backend.feature.overnightstays.dto.OvernightStayInsertDTO;
 import org.junit.jupiter.api.Test;
@@ -18,9 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -36,11 +33,9 @@ public class OvernightStaysIntegrationTests {
     private ObjectMapper objectMapper;
     @Autowired
     private OvernightStaysService overnightStaysService;
-    @Autowired
-    private OvernightStaysRepository overnightStaysRepository;
 
     @Test
-    public void testInsert_shouldFindInsertedOvernightStay() throws Exception {
+    public void testInsert_shouldFindAndThenDeleteInsertedOvernightStay() throws Exception {
         ClientInsertDTO clientInsertDTO = new ClientInsertDTO();
         clientInsertDTO.setClientFirstName("Franjo");
         clientInsertDTO.setClientLastName("Mindek");
@@ -56,13 +51,21 @@ public class OvernightStaysIntegrationTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(overnightStayInsertDTO)))
                 .andExpect(status().isCreated())
-                .andDo(print())
+//                .andDo(print())
                 .andReturn()
                 .getResponse();
 
         String location = response.getHeader("Location");
         assertThat(location).isNotNull();
+
         mockMvc.perform(get(location))
                 .andExpect(status().isOk());
+
+        mockMvc.perform(delete(location))
+                .andExpect(status().isNoContent());
+
+        mockMvc.perform(get(location))
+                .andExpect(status().isNotFound());
+
     }
 }
