@@ -74,15 +74,15 @@ public class ClientsRepository {
         parameters.addValue("clientLastName", clientLastName);
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        njdbc.update(query, parameters, keyHolder);
+        njdbc.update(query, parameters, keyHolder, new String[] {"client_id"});
         return keyHolder.getKey().longValue();
     }
 
     public Long insertClient(Client client) {
         String query = """
-                INSERT INTO 
+                INSERT INTO
                     client (client_national_id, client_phone_number, client_first_name, client_last_name)
-                VALUES 
+                VALUES
                     (:clientNationalId, :clientPhoneNumber, :clientFirstName, :clientLastName)
                 """;
         MapSqlParameterSource parameters = new MapSqlParameterSource();
@@ -92,13 +92,13 @@ public class ClientsRepository {
         parameters.addValue("clientLastName", client.getClientLastName());
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        njdbc.update(query, parameters, keyHolder);
+        njdbc.update(query, parameters, keyHolder, new String[] {"client_id"});
         return keyHolder.getKey().longValue();
     }
 
     public boolean updateClient(Client client) {
         String query = """
-                UPDATE 
+                UPDATE
                     client
                 SET
                     client_phone_number = :clientPhoneNumber,

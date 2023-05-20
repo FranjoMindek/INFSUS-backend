@@ -38,7 +38,7 @@ public class ClientsController {
     @PostMapping("/clients")
     public ResponseEntity<?> insertClient(@RequestBody ClientInsertDTO client) {
         Long id = this.clientsService.insertClient(client);
-        return ResponseEntity.created(URI.create("api/clients/" + id)).build();
+        return ResponseEntity.created(URI.create("/api/clients/" + id)).build();
     }
 
     @PutMapping("/clients/{id}")

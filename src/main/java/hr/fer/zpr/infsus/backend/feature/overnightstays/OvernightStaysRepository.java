@@ -61,8 +61,8 @@ public class OvernightStaysRepository {
         parameters.addValue("overnightStayStatusId", "OVERNIGHT_STAY_STATUS.PENDING");
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        njdbc.update(query, parameters, keyHolder);
-        return keyHolder.getKeyAs(Long.class);
+        njdbc.update(query, parameters, keyHolder, new String[] {"overnight_stay_id"});
+        return keyHolder.getKey().longValue();
     }
 
     public boolean updateOvernightStay(OvernightStay overnightStay) {

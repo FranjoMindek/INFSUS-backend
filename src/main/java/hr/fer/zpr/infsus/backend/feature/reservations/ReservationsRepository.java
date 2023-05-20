@@ -77,8 +77,8 @@ public class ReservationsRepository {
         parameters.addValue("reservationStatusId", "RESERVATION_STATUS.PENDING");
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        njdbc.update(query, parameters, keyHolder);
-        return keyHolder.getKeyAs(Long.class);
+        njdbc.update(query, parameters, keyHolder, new String[] {"reservation_id"});
+        return keyHolder.getKey().longValue();
     }
 
     public boolean updateReservation(Reservation reservation) {

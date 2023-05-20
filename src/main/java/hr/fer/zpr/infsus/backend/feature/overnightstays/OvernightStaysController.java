@@ -31,7 +31,7 @@ public class OvernightStaysController {
     @PostMapping("/overnight-stays")
     public ResponseEntity<?> insertOvernightStay(@RequestBody OvernightStayInsertDTO overnightStayInsertDTO) {
         Long id = this.overnightStaysService.insertOvernightStay(overnightStayInsertDTO);
-        return ResponseEntity.created(URI.create("api/overnight-stays/" + id)).build();
+        return ResponseEntity.created(URI.create("/api/overnight-stays/" + id)).build();
     }
 
     @PutMapping("/overnight-stays/{id}")

@@ -98,8 +98,8 @@ public class RoomsRepository {
         parameters.addValue("roomCategoryId", room.getRoomCategoryId());
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        njdbc.update(query, parameters, keyHolder);
-        return keyHolder.getKeyAs(Long.class);
+        njdbc.update(query, parameters, keyHolder,  new String[] {"room_id"});
+        return keyHolder.getKey().longValue();
     }
     public boolean updateRoom(Room room) {
         String query = """

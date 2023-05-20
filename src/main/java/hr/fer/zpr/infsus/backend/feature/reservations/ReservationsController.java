@@ -31,7 +31,7 @@ public class ReservationsController {
     @PostMapping("/reservations")
     public ResponseEntity<?> insertReservation(@RequestBody ReservationInsertDTO reservationInsert) {
         Long id = this.reservationsService.insertReservation(reservationInsert);
-        return ResponseEntity.created(URI.create("api/reservations/" + id)).build();
+        return ResponseEntity.created(URI.create("/api/reservations/" + id)).build();
     }
 
     @PutMapping("/reservations/{reservationId}")

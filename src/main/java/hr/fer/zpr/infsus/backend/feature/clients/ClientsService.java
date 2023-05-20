@@ -28,7 +28,7 @@ public class ClientsService {
 
     public Long insertClientIfNew(ClientInsertDTO clientInsertDTO) {
         Client oldClient = this.clientsRepository.getClientByNationalId(clientInsertDTO.getClientNationalId());
-        if (oldClient != null) {
+        if (oldClient == null) {
             return this.insertClient(clientInsertDTO);
         } else {
             return oldClient.getClientId();

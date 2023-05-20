@@ -32,7 +32,7 @@ public class RoomsController {
     @PostMapping("/rooms")
     public ResponseEntity<?> insertRoom(@RequestBody RoomInsertDTO room) {
         Long id = this.roomsService.insertRoom(room);
-        return ResponseEntity.created(URI.create("api/rooms/" + id)).build();
+        return ResponseEntity.created(URI.create("/api/rooms/" + id)).build();
     }
 
     @PutMapping("/rooms/{id}")
