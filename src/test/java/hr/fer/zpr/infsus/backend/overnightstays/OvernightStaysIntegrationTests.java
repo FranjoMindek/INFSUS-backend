@@ -1,4 +1,4 @@
-package hr.fer.zpr.infsus.backend.controller;
+package hr.fer.zpr.infsus.backend.overnightstays;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.fer.zpr.infsus.backend.BackendApplication;

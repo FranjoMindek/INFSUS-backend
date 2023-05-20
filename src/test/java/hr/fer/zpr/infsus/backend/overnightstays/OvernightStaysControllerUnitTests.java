@@ -1,4 +1,4 @@
-package hr.fer.zpr.infsus.backend.controller;
+package hr.fer.zpr.infsus.backend.overnightstays;
 
 import hr.fer.zpr.infsus.backend.feature.overnightstays.OvernightStaysController;
 import hr.fer.zpr.infsus.backend.feature.overnightstays.OvernightStaysService;
@@ -22,16 +22,12 @@ public class OvernightStaysControllerUnitTests {
 
     @Autowired
     private MockMvc mockMvc;
-//    @Autowired
-//    private ObjectMapper objectMapper;
     @MockBean
     private OvernightStaysService overnightStaysService;
     private final String API = "/api/overnight-stays";
 
-
     @Test
-    public void testGet_shouldReturn200Ok() throws Exception {
-
+    public void testGetShouldReturn200Ok() throws Exception {
         OvernightStayDTO overnightStayDTO1 = new OvernightStayDTO();
         overnightStayDTO1.setOvernightStayId(1L);
 
@@ -47,21 +43,19 @@ public class OvernightStaysControllerUnitTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].overnightStayId", is(1)))
                 .andExpect(jsonPath("$[1].overnightStayId", is(2)));
-//                .andDo(print());
     }
 
     @Test
-    public void testGetById_shouldReturn404NotFound() throws Exception {
+    public void testGetByIdShouldReturn404NotFound() throws Exception {
         final long overnightStayId = 999L;
         final String URI = API + "/" + overnightStayId;
 
         mockMvc.perform(get(URI))
                 .andExpect(status().isNotFound());
-//                .andDo(print());
     }
 
     @Test
-    public void testGetById_shouldReturn200Ok() throws Exception {
+    public void testGetByIdShouldReturn200Ok() throws Exception {
         final long overnightStayId = 999L;
         final String URI = API + "/" + overnightStayId;
 
