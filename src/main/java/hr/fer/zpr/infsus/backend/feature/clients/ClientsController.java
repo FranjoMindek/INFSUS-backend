@@ -1,7 +1,7 @@
 package hr.fer.zpr.infsus.backend.feature.clients;
 
 import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientDTO;
-import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsert;
+import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsertDTO;
 import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientUpdateDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +37,8 @@ public class ClientsController {
     }
 
     @PostMapping("/clients")
-    public ResponseEntity<?> insertClient(@RequestBody ClientInsert clientInsert) {
-        Long id = this.clientsService.insertClient(clientInsert);
+    public ResponseEntity<?> insertClient(@RequestBody ClientInsertDTO clientInsertDTO) {
+        Long id = this.clientsService.insertClient(clientInsertDTO);
         return ResponseEntity.created(URI.create("/api/clients/" + id)).build();
     }
 

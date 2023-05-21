@@ -1,7 +1,7 @@
 package hr.fer.zpr.infsus.backend.feature.clients;
 
 import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientDTO;
-import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsert;
+import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsertDTO;
 import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientUpdateDTO;
 import hr.fer.zpr.infsus.backend.feature.clients.model.Client;
 import lombok.RequiredArgsConstructor;
@@ -27,17 +27,17 @@ public class ClientsService {
         return ClientsMapper.toDTO(this.clientsRepository.getClientByNationalId(clientNationalId));
     }
 
-    public Long insertClientIfNew(ClientInsert clientInsert) {
-        Client oldClient = this.clientsRepository.getClientByNationalId(clientInsert.getClientNationalId());
+    public Long insertClientIfNew(ClientInsertDTO clientInsertDTO) {
+        Client oldClient = this.clientsRepository.getClientByNationalId(clientInsertDTO.getClientNationalId());
         if (oldClient == null) {
-            return this.insertClient(clientInsert);
+            return this.insertClient(clientInsertDTO);
         } else {
             return oldClient.getClientId();
         }
     }
 
-    public Long insertClient(ClientInsert clientInsert) {
-        return this.clientsRepository.insertClient(ClientsMapper.toEntity(clientInsert));
+    public Long insertClient(ClientInsertDTO clientInsertDTO) {
+        return this.clientsRepository.insertClient(ClientsMapper.toEntity(clientInsertDTO));
     }
 
     public boolean updateClient(ClientUpdateDTO clientDTO) {

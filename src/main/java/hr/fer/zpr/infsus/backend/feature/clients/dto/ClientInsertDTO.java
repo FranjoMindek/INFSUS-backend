@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class ClientInsert {
+public class ClientInsertDTO {
     String clientNationalId;
     String clientPhoneNumber;
     String clientFirstName;

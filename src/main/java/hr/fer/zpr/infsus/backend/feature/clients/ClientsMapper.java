@@ -1,7 +1,7 @@
 package hr.fer.zpr.infsus.backend.feature.clients;
 
 import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientDTO;
-import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsert;
+import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientInsertDTO;
 import hr.fer.zpr.infsus.backend.feature.clients.dto.ClientUpdateDTO;
 import hr.fer.zpr.infsus.backend.feature.clients.model.Client;
 
@@ -17,7 +17,7 @@ public class ClientsMapper {
                 .build();
     }
 
-    public static Client toEntity(ClientInsert dto) {
+    public static Client toEntity(ClientInsertDTO dto) {
         return Client.builder()
                 .clientNationalId(dto.getClientNationalId())
                 .clientPhoneNumber(dto.getClientPhoneNumber())
